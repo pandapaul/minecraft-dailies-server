@@ -4,11 +4,11 @@ var questSchema = mongoose.Schema({
     id: {type: String, index: {unique: true}},
     type: String,
     target: {
-        type: Number,
+        type: {type: Number},
         quantity: Number
     },
     reward: {
-        type: Number,
+        type: {type: Number},
         quantity: Number
     }
 }, {
@@ -20,7 +20,7 @@ questSchema.statics.findTodaysQuests = function () {
         createdAt: {
             $gte: new Date().setUTCHours(0)
         }
-    });
+    }, '-_id id type target reward');
 };
 
 var questModel = mongoose.model('Quest', questSchema);

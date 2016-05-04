@@ -1,4 +1,5 @@
 var chance = require('chance').Chance();
+var db = require('./db');
 
 function generateQuests(quantity) {
     quantity = Math.max(quantity || 0, 0);
@@ -16,12 +17,19 @@ function generateQuest() {
     var target = questTarget(type);
     var reward = questReward();
 
-    return {
+    var quest = new db.quest({
         id: id,
         type: type,
         target: target,
         reward: reward
-    };
+    });
+
+    quest.save()
+        .catch(function (err) {
+            console.log('ERROR - Unable to generate quest - ', err);
+        });
+
+    return quest;
 }
 
 function questId() {
