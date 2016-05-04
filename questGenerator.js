@@ -17,19 +17,19 @@ function generateQuest() {
     var target = questTarget(type);
     var reward = questReward();
 
-    var quest = new db.quest({
+    var questData = {
         id: id,
         type: type,
         target: target,
         reward: reward
-    });
+    };
 
-    quest.save()
+    new db.quest(questData).save()
         .catch(function (err) {
             console.log('ERROR - Unable to generate quest - ', err);
         });
 
-    return quest;
+    return questData;
 }
 
 function questId() {
