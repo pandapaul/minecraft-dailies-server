@@ -12,7 +12,7 @@ function authenticate(req) {
             if (err) {
                 reject(err);
             } else if(!isValid) {
-                reject(isValid);
+                reject('Provided accessToken is not valid');
             } else {
                 resolve(isValid);
             }

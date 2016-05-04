@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var quest = require('./quest');
+var user = require('./user');
 
 function connect() {
     return new Promise(function (resolve, reject) {
@@ -12,5 +13,6 @@ function connect() {
 
 module.exports = {
     connect: connect,
-    quest: quest
+    quest: quest,
+    user: user
 };
