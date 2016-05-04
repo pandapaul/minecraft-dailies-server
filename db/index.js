@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var quest = require('./quest');
 
 function connect() {
     return new Promise(function (resolve, reject) {
@@ -10,5 +11,6 @@ function connect() {
 }
 
 module.exports = {
-    connect: connect
+    connect: connect,
+    quest: quest
 };
