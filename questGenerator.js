@@ -26,7 +26,7 @@ function generateQuest() {
 
     new db.quest(questData).save()
         .catch(function (err) {
-            console.log('ERROR - Unable to generate quest - ', err);
+            console.log('ERROR - Unable to save generated quest - ', err);
         });
 
     return questData;
