@@ -9,6 +9,7 @@ connectToDb()
     .catch(logError);
 
 function routes() {
+    app.use(express.static('static'));
     app.use('/quests', quests);
 }
 

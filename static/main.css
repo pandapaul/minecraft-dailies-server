@@ -1,0 +1,24 @@
+body {
+    font-family: monospace;
+    background-color: #ada;
+    color: #444;
+    position: relative;
+}
+
+.content-middle {
+    text-align: center;
+    margin-top: 15em;
+}
+
+.content-middle a {
+    margin: 0.5em;
+}
+
+a {
+    color: #449;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #44e;
+}
