@@ -18,15 +18,21 @@ function generateQuests() {
 }
 
 function generateQuest() {
+    var id = questId();
     var type = questType();
     var target = questTarget(type);
     var reward = questReward();
 
     return {
+        id: id,
         type: type,
         target: target,
         reward: reward
     };
+}
+
+function questId() {
+    return chance.guid();
 }
 
 function questType() {
