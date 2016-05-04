@@ -2,7 +2,7 @@ var db = require('./db');
 var questGenerator = require('./questGenerator');
 var questsToGeneratePerDay = 5;
 
-function fetch() {
+function fetchDailies() {
     return db.quest.findTodaysQuests()
         .then(function (quests) {
             if (quests && quests.length) {
@@ -13,6 +13,11 @@ function fetch() {
         });
 }
 
+function fetchQuestById(questId) {
+    return db.quest.findByQuestId(questId);
+}
+
 module.exports = {
-    fetch: fetch
+    fetchDailies: fetchDailies,
+    fetchQuestById: fetchQuestById
 };

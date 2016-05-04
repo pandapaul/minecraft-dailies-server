@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var quests = require('./routes/quests');
+var users = require('./routes/users');
 var db = require('./db');
 
 routes();
@@ -11,6 +12,11 @@ connectToDb()
 function routes() {
     app.use(express.static('static'));
     app.use('/quests', quests);
+    app.use('/users', users);
+    app.use(function(err, req, res, next) {
+        console.error(err.stack);
+        res.status(500).send('Unfortunately an error has occurred.');
+    });
 }
 
 function connectToDb() {
