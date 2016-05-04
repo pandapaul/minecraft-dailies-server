@@ -1,11 +1,11 @@
-var yggdrasil = require('yggdrasil');
+var yggdrasil = require('yggdrasil')({});
 
 function authenticate(req) {
-    if (!req.accessToken) {
-        return Promise.reject();
+    if (!req.body.accessToken) {
+        return Promise.reject('No accessToken provided.');
     }
     return new Promise(function (resolve,reject) {
-        yggdrasil.validate(req.accessToken, function (isValid, err) {
+        yggdrasil.validate(req.body.accessToken, function (isValid, err) {
             if (err) {
                 reject(err);
             } else if(!isValid) {

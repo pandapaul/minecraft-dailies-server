@@ -1,4 +1,5 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 var quests = require('./routes/quests');
 var users = require('./routes/users');
@@ -7,15 +8,22 @@ var db = require('./db');
 routes();
 connectToDb()
     .then(listen)
-    .catch(logError);
+    .catch(logDbConnectionError);
 
 function routes() {
     app.use(express.static('static'));
+    app.use(bodyParser.json());
     app.use('/quests', quests);
     app.use('/users', users);
     app.use(function(err, req, res, next) {
-        console.error(err.stack);
-        res.status(500).send('Unfortunately an error has occurred.');
+        if (err.stack) {
+            console.error(err.stack);
+            res.status(500).send('Unfortunately an error has occurred.');
+        } else {
+            res.status(400).json({
+                error: err
+            });
+        }
     });
 }
 
@@ -29,6 +37,6 @@ function listen() {
 	console.log('Listening on port ' + listenPort);
 }
 
-function logError(error) {
-    console.log('Error:', error);
+function logDbConnectionError(error) {
+    console.log('Database Connection Error:', error);
 }

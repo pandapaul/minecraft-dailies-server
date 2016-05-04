@@ -20,10 +20,18 @@ router.get('/:questId', function (req, res) {
         });
 });
 
-router.post('/:questId', function (req, res, next) {
-    validateQuestId(req.params.questId)
-        .then(authenticate(req))
-        .then(next)
+router.use('/:questId', function (req, res, next) {
+    authenticate(req)
+        .then(function (data) {
+            return validateQuestId(req.params.questId);
+        })
+        .then(function (questIsValid) {
+            if (questIsValid) {
+                next();
+            } else {
+                return Promise.reject('Invalid quest ID');
+            }
+        })
         .catch(function (err) {
             next(err);
         });
@@ -44,15 +52,15 @@ function validateQuestId(questId) {
 }
 
 router.post('/:questId/accept', function (req, res) {
-
+    res.end();
 });
 
 router.post('/:questId/complete', function (req, res) {
-
+    res.end();
 });
 
 router.post('/:questId/abandon', function (req, res) {
-
+    res.end();
 });
 
 module.exports = router;
