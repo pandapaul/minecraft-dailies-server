@@ -46,32 +46,32 @@ function questTarget(type) {
     var target = {};
     if (type === 'hunt') {
         target.type = chance.pickone([
-            'zombie',
-            'skeleton',
-            'creeper',
-            'spider'
+            54, //zombie
+            51, //skeleton
+            50, //creeper
+            52 //spider
         ]);
         target.quantity = 10;
     } else if (type === 'gather') {
         target = chance.pickone([
             {
-                type: 'iron',
+                type: 265, //iron ingot
                 quantity: 20
             },
             {
-                type: 'gold',
+                type: 266, //gold ingot
                 quantity: 15
             },
             {
-                type: 'diamond',
+                type: 264, //diamond
                 quantity: 5
             },
             {
-                type: 'redstone',
+                type: 331, //redstone
                 quantity: 30
             },
             {
-                type: 'emerald',
+                type: 388, //emerald
                 quantity: 5
             }
         ]);
@@ -86,8 +86,8 @@ function questReward() {
         dev: 0.15
     });
     return {
-        type: 'xp',
-        quantity: Math.round((multiplier * 5000))
+        type: 384, //bottle o' enchanting,
+        quantity: Math.round((multiplier * 30))
     };
 }
 
