@@ -18,6 +18,7 @@
   "homepage": "https://github.com/pandapaul/minecraft-dailies-server#readme",
   "dependencies": {
     "chance": "^1.0.1",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "mongoose": "^4.4.14"
   }
 }
