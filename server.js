@@ -15,16 +15,7 @@ function routes() {
     app.use(bodyParser.json());
     app.use('/quests', quests);
     app.use('/users', users);
-    app.use(function(err, req, res, next) {
-        if (err.stack) {
-            console.error(err.stack);
-            res.status(500).send('Unfortunately an error has occurred.');
-        } else {
-            res.status(400).json({
-                error: err
-            });
-        }
-    });
+    app.use(basicErrorHandling);
 }
 
 function connectToDb() {
@@ -39,4 +30,15 @@ function listen() {
 
 function logDbConnectionError(error) {
     console.log('Database Connection Error:', error);
+}
+
+function basicErrorHandling (err, req, res, next) {
+    if (err.stack) {
+        console.error(err.stack);
+        res.status(500).send('Unfortunately an error has occurred.');
+    } else {
+        res.status(400).json({
+            error: err
+        });
+    }
 }
