@@ -86,13 +86,13 @@ function questReward() {
         mean: 1,
         dev: 0.25
     });
-    return chance.pickone({
+    return chance.pickone([{
         type: 384, //bottle o' enchanting
         quantity: Math.round(multiplier * 30)
     }, {
       type: 264, //diamonds! yay!
       quantity: Math.round(multiplier * 5)
-    });
+    }]);
 }
 
 function generate(quantity) {
