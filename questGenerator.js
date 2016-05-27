@@ -84,12 +84,15 @@ function questTarget(type) {
 function questReward() {
     var multiplier = chance.normal({
         mean: 1,
-        dev: 0.15
+        dev: 0.25
     });
-    return {
-        type: 384, //bottle o' enchanting,
-        quantity: Math.round((multiplier * 30))
-    };
+    return chance.pickone({
+        type: 384, //bottle o' enchanting
+        quantity: Math.round(multiplier * 30)
+    }, {
+      type: 264, //diamonds! yay!
+      quantity: Math.round(multiplier * 5)
+    });
 }
 
 function generate(quantity) {
