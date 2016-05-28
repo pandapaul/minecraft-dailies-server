@@ -14,7 +14,7 @@ function routes() {
     app.use(express.static('static'));
     app.use(bodyParser.json());
     app.use('/quests', quests);
-    app.use('/users', users);
+    app.use('/:username', users);
     app.use(basicErrorHandling);
 }
 
