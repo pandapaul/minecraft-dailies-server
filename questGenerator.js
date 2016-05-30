@@ -64,8 +64,8 @@ function questTarget(type) {
                 quantity: 15
             },
             {
-                type: 264, //diamond
-                quantity: 5
+                type: 263, //coal
+                quantity: 30
             },
             {
                 type: 331, //redstone
@@ -84,14 +84,14 @@ function questTarget(type) {
 function questReward() {
     var multiplier = chance.normal({
         mean: 1,
-        dev: 0.25
+        dev: 0.2
     });
     return chance.pickone([{
         type: 384, //bottle o' enchanting
         quantity: Math.round(multiplier * 30)
     }, {
       type: 264, //diamonds! yay!
-      quantity: Math.round(multiplier * 5)
+      quantity: Math.round(multiplier * 4)
     }]);
 }
 
