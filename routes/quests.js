@@ -1,5 +1,7 @@
 var express = require('express');
-var router = express.Router();
+var router = express.Router({
+    mergeParams: true
+});
 var questFetcher = require('../questFetcher');
 var authenticate = require('../authenticate');
 
