@@ -1,6 +1,11 @@
 var chance = require('chance').Chance();
 var db = require('./db');
 
+function generateDailies() {
+    var questsToGeneratePerDay = 5;
+    return generateQuests(questsToGeneratePerDay);
+}
+
 function generateQuests(quantity) {
     quantity = Math.max(quantity || 0, 0);
     var quests = [];
@@ -106,5 +111,6 @@ function generate(quantity) {
 module.exports = {
     generate: generate,
     generateQuests: generateQuests,
-    generateQuest: generateQuest
+    generateQuest: generateQuest,
+    generateDailies: generateDailies
 };

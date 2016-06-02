@@ -1,6 +1,5 @@
 var db = require('./db');
 var questGenerator = require('./questGenerator');
-var questsToGeneratePerDay = 5;
 
 function fetchDailies() {
     return db.quest.findTodaysQuests()
@@ -8,7 +7,7 @@ function fetchDailies() {
             if (quests && quests.length) {
                 return quests;
             } else {
-                return questGenerator.generate(questsToGeneratePerDay);
+                return questGenerator.generateDailies();
             }
         });
 }
