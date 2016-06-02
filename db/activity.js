@@ -1,18 +1,18 @@
 var mongoose = require('mongoose');
+var cleanFindModifier = '-_id username questId action date';
 
 var activitySchema = mongoose.Schema({
     username: String,
     questId: String,
-    action: String
-}, {
-    timestamps: true
+    action: String,
+    date: {type: Date, default: Date.now}
 });
 
 activitySchema.statics.findForUser = function (username) {
     return this.find({
         username: username
-    }).sort({
-        createdAt: 'descending'
+    }, cleanFindModifier).sort({
+        date: 'descending'
     });
 };
 

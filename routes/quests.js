@@ -4,6 +4,8 @@ var router = express.Router({
 });
 var questFetcher = require('../questFetcher');
 var authenticate = require('../authenticate');
+var db = require('../db');
+var Activity = db.activity;
 
 router.get('/', function (req, res) {
     questFetcher.fetchDailies()
@@ -53,16 +55,31 @@ function validateQuestId(questId) {
         });
 }
 
-router.post('/:questId/accept', function (req, res) {
-    res.end();
+router.post('/:questId/accept', function (req, res, next) {
+    createActivity(req, res, next, 'accept');
 });
 
-router.post('/:questId/complete', function (req, res) {
-    res.end();
+router.post('/:questId/complete', function (req, res, next) {
+    createActivity(req, res, next, 'complete');
 });
 
-router.post('/:questId/abandon', function (req, res) {
-    res.end();
+router.post('/:questId/abandon', function (req, res, next) {
+    createActivity(req, res, next, 'abandon');
 });
+
+function createActivity(req, res, next, action) {
+    var activity = new Activity({
+        username: req.params.username || req.body.username,
+        questId: req.params.questId,
+        action: action
+    });
+    activity.save()
+        .then(function () {
+            res.json(activity);
+        })
+        .catch(function (err) {
+            next(err);
+        });
+}
 
 module.exports = router;
