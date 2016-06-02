@@ -1,5 +1,6 @@
 var chance = require('chance').Chance();
 var db = require('./db');
+var Quest = db.quest;
 
 function generateDailies() {
     var questsToGeneratePerDay = 5;
@@ -29,7 +30,7 @@ function generateQuest() {
         reward: reward
     };
 
-    new db.quest(questData).save()
+    new Quest(questData).save()
         .catch(function (err) {
             console.log('ERROR - Unable to save generated quest - ', err);
         });

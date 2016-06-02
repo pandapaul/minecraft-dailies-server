@@ -4,8 +4,8 @@ var cleanFindModifier = '-_id id';
 var userSchema = mongoose.Schema({
     username: {type: String, index: {unique: true}},
     quests: {
-        available: [{type: String, ref: 'Quest'}],
-        inProgress: [{type: String, ref: 'Quest'}]
+        inProgress: [{type: String, ref: 'Quest'}],
+        complete: [{type: String, ref: 'Quest'}]
     }
 }, {
     timestamps: true
@@ -14,7 +14,7 @@ var userSchema = mongoose.Schema({
 userSchema.statics.findWithQuestsPopulated = function (username) {
     return this.findOne({
         username: username
-    }).populate('quests.available quests.inProgress');
+    }).populate('quests.inProgress quests.complete');
 };
 
 var userModel = mongoose.model('User', userSchema);
