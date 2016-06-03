@@ -30,24 +30,38 @@ router.use('/:questId', function (req, res, next) {
             return validateQuestId(req.params.questId);
         })
         .then(function () {
-            return fetchQuestStatus(req.params.username, req.params.questId);
+            return fetchQuestStatus(req);
         })
+        .then(next)
         .catch(function (err) {
             next(err);
         });
 });
 
 function validateQuestId(questId) {
-    return questFetcher.fetchQuestById(questId)
-        .then(function (quest) {
-            if (quest && quest.id === questId) {
-                return Promise.resolve();
-            } else {
-                return Promise.reject('Invalid quest ID');
-            }
+    return new Promise(function (resolve, reject) {
+        questFetcher.fetchQuestById(questId)
+            .then(function (quest) {
+                if (quest && quest.id === questId) {
+                    return resolve();
+                } else {
+                    return reject('Invalid quest ID');
+                }
+            })
+            .catch(function (err) {
+                return reject('Invalid quest ID');
+            });
+    });
+}
+
+function fetchQuestStatus(req) {
+    var username = req.params.username;
+    var questId = req.params.questId;
+    return db.user.findOne({
+            username: username
         })
-        .catch(function (err) {
-            return Promise.reject('Invalid quest ID');
+        .then(function (user) {
+            req.questStatus = user.quests;
         });
 }
 

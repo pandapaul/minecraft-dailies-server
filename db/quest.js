@@ -15,6 +15,16 @@ var questSchema = mongoose.Schema({
     timestamps: true
 });
 
+questSchema.set('toJSON', {
+    transform: function (doc, ret, options) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
+        delete ret.createdAt;
+        delete ret.updatedAt;
+    }
+});
+
 questSchema.statics.findTodaysQuests = function () {
     return this.find({
         createdAt: {
