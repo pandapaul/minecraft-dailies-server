@@ -18,28 +18,22 @@ function generateQuests(quantity) {
 }
 
 function generateQuest() {
-    var id = questId();
     var type = questType();
     var target = questTarget(type);
     var reward = questReward();
 
-    var questData = {
-        id: id,
+    var quest = new Quest({
         type: type,
         target: target,
         reward: reward
-    };
+    });
 
-    new Quest(questData).save()
+    quest.save()
         .catch(function (err) {
             console.log('ERROR - Unable to save generated quest - ', err);
         });
 
-    return questData;
-}
-
-function questId() {
-    return chance.guid();
+    return quest;
 }
 
 function questType() {

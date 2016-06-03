@@ -29,12 +29,8 @@ router.use('/:questId', function (req, res, next) {
         .then(function (data) {
             return validateQuestId(req.params.questId);
         })
-        .then(function (questIsValid) {
-            if (questIsValid) {
-                next();
-            } else {
-                return Promise.reject('Invalid quest ID');
-            }
+        .then(function () {
+            return fetchQuestStatus(req.params.username, req.params.questId);
         })
         .catch(function (err) {
             next(err);
@@ -45,19 +41,28 @@ function validateQuestId(questId) {
     return questFetcher.fetchQuestById(questId)
         .then(function (quest) {
             if (quest && quest.id === questId) {
-                return true;
+                return Promise.resolve();
             } else {
-                return false;
+                return Promise.reject('Invalid quest ID');
             }
         })
-        .catch(function () {
-            return false;
+        .catch(function (err) {
+            return Promise.reject('Invalid quest ID');
         });
 }
 
 router.post('/:questId/accept', function (req, res, next) {
-    createActivity(req, res, next, 'accept');
+    var username = req.params.username || req.body.username;
+    if (questIsAvailable(username, req.params.questId)) {
+        createActivity(req, res, next, 'accept');
+    } else {
+        next('');
+    }
 });
+
+function questIsAvailable(username, questId) {
+    return true;
+}
 
 router.post('/:questId/complete', function (req, res, next) {
     createActivity(req, res, next, 'complete');

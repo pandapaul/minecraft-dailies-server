@@ -1,8 +1,7 @@
 var mongoose = require('mongoose');
-var cleanFindModifier = '-_id id type target reward';
+var cleanFindModifier = '-_id type target reward';
 
 var questSchema = mongoose.Schema({
-    id: {type: String, index: {unique: true}},
     type: String,
     target: {
         type: {type: Number},
@@ -21,13 +20,13 @@ questSchema.statics.findTodaysQuests = function () {
         createdAt: {
             $gte: new Date().setUTCHours(0)
         }
-    }, cleanFindModifier);
+    });
 };
 
 questSchema.statics.findByQuestId = function (questId) {
     return this.findOne({
-        id: questId
-    }, cleanFindModifier);
+        _id: questId
+    });
 };
 
 var questModel = mongoose.model('Quest', questSchema);
