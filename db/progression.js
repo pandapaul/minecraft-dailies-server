@@ -4,16 +4,24 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 var progressionSchema = mongoose.Schema({
     username: String,
     quest: {type: ObjectId, ref: 'Quest'},
-    status: String
+    status: String,
+    progress: Number
 });
 
-progressionSchema.index({username: 1, quest: 1});
+progressionSchema.index({username: 1, quest: 1}, {unique: true});
 
 progressionSchema.statics.findForUserAndQuest = function (username, questId) {
-    return this.find({
+    return this.findOne({
         username: username,
         quest: questId
     });
+};
+
+progressionSchema.statics.upsert = function (progression) {
+    return this.findOneAndUpdate({
+        username: progression.username,
+        quest: progression.quest
+    }, progression, {upsert: true});
 };
 
 progressionSchema.set('toJSON', {

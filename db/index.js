@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var quest = require('./quest');
 var user = require('./user');
 var activity = require('./activity');
+var progression = require('./progression');
 
 function connect() {
     return new Promise(function (resolve, reject) {
@@ -16,5 +17,6 @@ module.exports = {
     connect: connect,
     quest: quest,
     user: user,
-    activity: activity
+    activity: activity,
+    progression: progression
 };

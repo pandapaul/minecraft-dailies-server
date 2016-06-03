@@ -8,34 +8,30 @@ var db = require('../db');
 var Activity = db.activity;
 
 router.get('/', function (req, res) {
-    questFetcher.fetchDailies()
+    questFetcher.fetchDailies(req.params.username)
         .then(function (quests) {
             res.json(quests);
         });
 });
 
-router.get('/:questId', function (req, res) {
+router.get('/:questId', function (req, res, next) {
     questFetcher.fetchQuestById(req.params.questId)
         .then(function (quest) {
             res.json(quest);
         })
-        .catch(function (err) {
-            next(err);
-        });
+        .catch(next);
 });
 
 router.use('/:questId', function (req, res, next) {
     authenticate(req)
-        .then(function (data) {
+        .then(function () {
             return validateQuestId(req.params.questId);
         })
         .then(function () {
             return fetchQuestStatus(req);
         })
         .then(next)
-        .catch(function (err) {
-            next(err);
-        });
+        .catch(next);
 });
 
 function validateQuestId(questId) {
@@ -57,48 +53,105 @@ function validateQuestId(questId) {
 function fetchQuestStatus(req) {
     var username = req.params.username;
     var questId = req.params.questId;
-    return db.user.findOne({
-            username: username
-        })
-        .then(function (user) {
-            req.questStatus = user.quests;
+    return db.progression.findForUserAndQuest(username, questId)
+        .then(function (progression) {
+            req.questStatus = progression && progression.status;
         });
 }
 
 router.post('/:questId/accept', function (req, res, next) {
     var username = req.params.username || req.body.username;
-    if (questIsAvailable(username, req.params.questId)) {
-        createActivity(req, res, next, 'accept');
+    var questId = req.params.questId;
+    if (!req.questStatus) {
+        updateQuestStatus(username, questId, 'accepted')
+            .then(function () {
+                createActivity(req, res, next, 'accept');
+            })
+            .catch(next);
     } else {
-        next('');
+        next('Invalid quest status [' + req.questStatus + ']');
     }
 });
 
-function questIsAvailable(username, questId) {
-    return true;
-}
+router.post('/:questId/progress', function (req, res, next) {
+    var username = req.params.username || req.body.username;
+    var questId = req.params.questId;
+    var progress = req.body.progress;
+    
+    if (!progress) {
+        next('Invalid progress [' + progress + ']');
+    }
+    
+    if (req.questStatus === 'accepted') {
+        updateQuestProgress(username, questId, progress)
+            .then(function () {
+                res.json({
+                    username: username,
+                    questId: questId,
+                    progress: progress
+                });
+            })
+            .catch(next);
+    } else {
+        next('Invalid quest status [' + req.questStatus + ']');
+    }
+});
 
 router.post('/:questId/complete', function (req, res, next) {
-    createActivity(req, res, next, 'complete');
+    var username = req.params.username || req.body.username;
+    var questId = req.params.questId;
+    if (req.questStatus === 'accepted') {
+        updateQuestStatus(username, questId, 'complete')
+            .then(function () {
+                createActivity(req, res, next, 'complete');
+            })
+            .catch(next);
+    } else {
+        next('Invalid quest status [' + req.questStatus + ']');
+    }
 });
 
 router.post('/:questId/abandon', function (req, res, next) {
-    createActivity(req, res, next, 'abandon');
+    var username = req.params.username || req.body.username;
+    var questId = req.params.questId;
+    if (req.questStatus === 'accepted') {
+        updateQuestStatus(username, questId, null)
+            .then(function () {
+                createActivity(req, res, next, 'abandon');
+            })
+            .catch(next);
+    } else {
+        next('Invalid quest status [' + req.questStatus + ']');
+    }
 });
+
+function updateQuestStatus(username, questId, status) {
+    return db.progression.upsert({
+        username: username,
+        quest: questId,
+        status: status
+    });
+}
+
+function updateQuestProgress(username, questId, progress) {
+    return db.progression.upsert({
+        username: username,
+        quest: questId,
+        progress: progress
+    });
+}
 
 function createActivity(req, res, next, action) {
     var activity = new Activity({
         username: req.params.username || req.body.username,
-        questId: req.params.questId,
+        quest: req.params.questId,
         action: action
     });
     activity.save()
         .then(function () {
             res.json(activity);
         })
-        .catch(function (err) {
-            next(err);
-        });
+        .catch(next);
 }
 
 module.exports = router;
