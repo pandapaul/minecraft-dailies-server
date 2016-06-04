@@ -9,11 +9,21 @@ var Activity = db.activity;
 
 router.get('/', function (req, res, next) {
     if (req.params.username) {
+        /**
+         * @api {get} /:username/quests Get Quests for User
+         * @apiGroup Quests
+         * @apiVersion 1.0.0
+         */
         questFetcher.fetchQuestInventory(req.params.username)
             .then(function (quests) {
                 res.json(quests);
             }).catch(next);
     } else {
+        /**
+         * @api {get} /quests Get All Quests
+         * @apiGroup Quests
+         * @apiVersion 1.0.0
+         */
         questFetcher.fetchDailies()
             .then(function (quests) {
                 res.json(quests);
@@ -21,6 +31,16 @@ router.get('/', function (req, res, next) {
     }
 });
 
+/**
+ * @api {get} /:questId Get a Specific Quest
+ * @apiGroup Quests
+ * @apiVersion 1.0.0
+ */
+/**
+ * @api {get} /:username/:questId Get a Specific Quest
+ * @apiGroup Quests
+ * @apiVersion 1.0.0
+ */
 router.get('/:questId', function (req, res, next) {
     questFetcher.fetchQuestById(req.params.questId)
         .then(function (quest) {
@@ -66,6 +86,11 @@ function fetchQuestStatus(req) {
         });
 }
 
+/**
+ * @api {post} /:username/:questId/accept Accept a Quest
+ * @apiGroup Quests
+ * @apiVersion 1.0.0
+ */
 router.post('/:questId/accept', function (req, res, next) {
     var username = req.params.username || req.body.username;
     var questId = req.params.questId;
@@ -80,6 +105,11 @@ router.post('/:questId/accept', function (req, res, next) {
     }
 });
 
+/**
+ * @api {post} /:username/:questId/progress Update Quest Progress
+ * @apiGroup Quests
+ * @apiVersion 1.0.0
+ */
 router.post('/:questId/progress', function (req, res, next) {
     var username = req.params.username || req.body.username;
     var questId = req.params.questId;
@@ -104,6 +134,11 @@ router.post('/:questId/progress', function (req, res, next) {
     }
 });
 
+/**
+ * @api {post} /:username/:questId/accept Complete a Quest
+ * @apiGroup Quests
+ * @apiVersion 1.0.0
+ */
 router.post('/:questId/complete', function (req, res, next) {
     var username = req.params.username || req.body.username;
     var questId = req.params.questId;
@@ -118,6 +153,11 @@ router.post('/:questId/complete', function (req, res, next) {
     }
 });
 
+/**
+ * @api {post} /:username/:questId/abandon Abandon a Quest
+ * @apiGroup Quests
+ * @apiVersion 1.0.0
+ */
 router.post('/:questId/abandon', function (req, res, next) {
     var username = req.params.username || req.body.username;
     var questId = req.params.questId;
