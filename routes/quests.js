@@ -7,11 +7,18 @@ var authenticate = require('../authenticate');
 var db = require('../db');
 var Activity = db.activity;
 
-router.get('/', function (req, res) {
-    questFetcher.fetchDailies(req.params.username)
-        .then(function (quests) {
-            res.json(quests);
-        });
+router.get('/', function (req, res, next) {
+    if (req.params.username) {
+        questFetcher.fetchQuestInventory(req.params.username)
+            .then(function (quests) {
+                res.json(quests);
+            }).catch(next);
+    } else {
+        questFetcher.fetchDailies()
+            .then(function (quests) {
+                res.json(quests);
+            }).catch(next);
+    }
 });
 
 router.get('/:questId', function (req, res, next) {
@@ -77,11 +84,11 @@ router.post('/:questId/progress', function (req, res, next) {
     var username = req.params.username || req.body.username;
     var questId = req.params.questId;
     var progress = req.body.progress;
-    
+
     if (!progress) {
         next('Invalid progress [' + progress + ']');
     }
-    
+
     if (req.questStatus === 'accepted') {
         updateQuestProgress(username, questId, progress)
             .then(function () {

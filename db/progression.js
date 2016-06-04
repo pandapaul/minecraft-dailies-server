@@ -10,6 +10,21 @@ var progressionSchema = mongoose.Schema({
 
 progressionSchema.index({username: 1, quest: 1}, {unique: true});
 
+progressionSchema.statics.findForUserAndQuests = function (username, quests) {
+    var questIds = [];
+    if (quests && quests[0] && quests[0].id) {
+        quests.forEach(function (quest, index, array) {
+            questIds.push(quest.id);
+        });
+    } else {
+        questIds = quests || [];
+    }
+
+    return this.find({
+        username: username
+    }).where('quest').in(questIds);
+};
+
 progressionSchema.statics.findForUserAndQuest = function (username, questId) {
     return this.findOne({
         username: username,

@@ -3,6 +3,8 @@ var cleanFindModifier = '-_id type target reward';
 
 var questSchema = mongoose.Schema({
     type: String,
+    status: String,
+    progress: Number,
     target: {
         type: {type: Number},
         quantity: Number
