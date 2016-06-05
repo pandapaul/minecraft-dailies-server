@@ -10,12 +10,14 @@ quests.forEach(function (quest) {
 
 function generateDailies() {
     var dailies = chance.pickset(quests, 5);
-    dailies.forEach(function (daily) {
-        new Quest({
+    dailies.forEach(function (daily, index) {
+        var dbQuest = new Quest({
             name: daily.name
-        }).save().catch(function (err) {
+        });
+        dbQuest.save().catch(function (err) {
             console.log('ERROR - Unable to save generated daily - ', err);
         });
+        dailies[index].id = dbQuest.id;
     });
     return dailies;
 }
