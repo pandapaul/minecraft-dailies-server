@@ -5,6 +5,14 @@ body {
     position: relative;
 }
 
+.content-top {
+    text-align: center;
+    margin-top: 3em;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100em;
+}
+
 .content-middle {
     text-align: center;
     margin-top: 15em;
@@ -21,4 +29,52 @@ a {
 
 a:hover {
     color: #44e;
+}
+
+.quest-list {
+    margin-top: 1em;
+}
+
+.quest {
+    background-color: rgba(255,255,255,0.5);
+    border: 1px solid rgba(0,0,0,0.5);
+    margin: 1em;
+    padding: 1em;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.15);
+    text-align: left;
+    width: 25em;
+    display: inline-block;
+}
+
+.quest-type {
+    display: inline-block;
+    width: 3em;
+    height: 3em;
+    margin-right: 1.1em;
+    background-size: cover;
+}
+
+.quest-type.hunt {
+    background-image: url('images/diamondSword.png');
+}
+
+.quest-type.gather {
+    background-image: url('images/diamondPick.png');
+}
+
+.quest-text-wrapper {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.quest-name {
+    font-size: 1.5em;
+}
+
+.quest-description {
+
+}
+
+.template {
+    display: none;
 }

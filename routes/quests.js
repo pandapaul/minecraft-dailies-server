@@ -3,6 +3,7 @@ var router = express.Router({
     mergeParams: true
 });
 var questFetcher = require('../questFetcher');
+var questLoader = require('../questLoader');
 var authenticate = require('../authenticate');
 var db = require('../db');
 var Activity = db.activity;
@@ -32,12 +33,21 @@ router.get('/', function (req, res, next) {
 });
 
 /**
- * @api {get} /:questId Get a Specific Quest
+ * @api {get} /quests/list Get a list of all quests
+ * @apiGroup Quests
+ * @apiVersion 1.0.0
+ */
+router.get('/list', function (req, res, next) {
+    res.json(questLoader.load());
+});
+
+/**
+ * @api {get} /quests/:questId Get a Specific Quest
  * @apiGroup Quests
  * @apiVersion 1.0.0
  */
 /**
- * @api {get} /:username/:questId Get a Specific Quest
+ * @api {get} /:username/quests/:questId Get a Specific Quest
  * @apiGroup Quests
  * @apiVersion 1.0.0
  */
@@ -87,7 +97,7 @@ function fetchQuestStatus(req) {
 }
 
 /**
- * @api {post} /:username/:questId/accept Accept a Quest
+ * @api {post} /:username/quests/:questId/accept Accept a Quest
  * @apiGroup Quests
  * @apiVersion 1.0.0
  */
@@ -106,7 +116,7 @@ router.post('/:questId/accept', function (req, res, next) {
 });
 
 /**
- * @api {post} /:username/:questId/progress Update Quest Progress
+ * @api {post} /:username/quests/:questId/progress Update Quest Progress
  * @apiGroup Quests
  * @apiVersion 1.0.0
  */
@@ -135,7 +145,7 @@ router.post('/:questId/progress', function (req, res, next) {
 });
 
 /**
- * @api {post} /:username/:questId/accept Complete a Quest
+ * @api {post} /:username/quests/:questId/accept Complete a Quest
  * @apiGroup Quests
  * @apiVersion 1.0.0
  */
@@ -154,7 +164,7 @@ router.post('/:questId/complete', function (req, res, next) {
 });
 
 /**
- * @api {post} /:username/:questId/abandon Abandon a Quest
+ * @api {post} /:username/quests/:questId/abandon Abandon a Quest
  * @apiGroup Quests
  * @apiVersion 1.0.0
  */
