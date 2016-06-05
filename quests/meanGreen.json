@@ -1,0 +1,13 @@
+{
+    "name": "Mean Green",
+    "description": "Gather 5 Emeralds",
+    "type": "gather",
+    "target": {
+        "type": 388,
+        "quantity": 5
+    },
+    "reward": {
+        "type": 384,
+        "quantity": 30
+    }
+}

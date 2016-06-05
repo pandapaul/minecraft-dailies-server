@@ -1,0 +1,13 @@
+{
+    "name": "Hiss Hiss Boom Boom",
+    "description": "Kill 10 Creepers",
+    "type": "hunt",
+    "target": {
+        "type": 50,
+        "quantity": 10
+    },
+    "reward": {
+        "type": 264,
+        "quantity": 2
+    }
+}

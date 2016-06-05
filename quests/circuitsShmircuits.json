@@ -1,0 +1,13 @@
+{
+    "name": "Circuits Shmircuits",
+    "description": "Gather 64 Redstone",
+    "type": "gather",
+    "target": {
+        "type": 331,
+        "quantity": 64
+    },
+    "reward": {
+        "type": 384,
+        "quantity": 30
+    }
+}

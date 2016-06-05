@@ -1,0 +1,13 @@
+{
+    "name": "Here There Be Zombos",
+    "description": "Kill 10 Zombies",
+    "type": "hunt",
+    "target": {
+        "type": 54,
+        "quantity": 10
+    },
+    "reward": {
+        "type": 384,
+        "quantity": 30
+    }
+}

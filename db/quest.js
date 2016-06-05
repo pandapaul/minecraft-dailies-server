@@ -2,17 +2,9 @@ var mongoose = require('mongoose');
 var cleanFindModifier = '-_id type target reward';
 
 var questSchema = mongoose.Schema({
-    type: String,
+    name: String,
     status: String,
-    progress: Number,
-    target: {
-        type: {type: Number},
-        quantity: Number
-    },
-    reward: {
-        type: {type: Number},
-        quantity: Number
-    }
+    progress: Number
 }, {
     timestamps: true
 });

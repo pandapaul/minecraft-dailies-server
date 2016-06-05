@@ -1,0 +1,13 @@
+{
+    "name": "Use Your Shoe!",
+    "description": "Kill 10 Spiders",
+    "type": "hunt",
+    "target": {
+        "type": 52,
+        "quantity": 10
+    },
+    "reward": {
+        "type": 384,
+        "quantity": 30
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "name": "Smith Some Shiny",
+    "description": "Gather 25 Iron Ingots",
+    "type": "gather",
+    "target": {
+        "type": 265,
+        "quantity": 25
+    },
+    "reward": {
+        "type": 384,
+        "quantity": 30
+    }
+}

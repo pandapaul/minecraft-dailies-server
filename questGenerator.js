@@ -1,111 +1,46 @@
 var chance = require('chance').Chance();
 var db = require('./db');
 var Quest = db.quest;
+var quests = require('./questLoader').load();
+var questsMap = {};
+
+quests.forEach(function (quest) {
+    questsMap[quest.name] = quest;
+});
 
 function generateDailies() {
-    var questsToGeneratePerDay = 5;
-    return generateQuests(questsToGeneratePerDay);
-}
-
-function generateQuests(quantity) {
-    quantity = Math.max(quantity || 0, 0);
-    var quests = [];
-    while (quantity) {
-        quantity--;
-        quests.push(generateQuest());
-    }
-    return quests;
-}
-
-function generateQuest() {
-    var type = questType();
-    var target = questTarget(type);
-    var reward = questReward();
-
-    var quest = new Quest({
-        type: type,
-        target: target,
-        reward: reward
-    });
-
-    quest.save()
-        .catch(function (err) {
-            console.log('ERROR - Unable to save generated quest - ', err);
+    var dailies = chance.pickset(quests, 5);
+    dailies.forEach(function (daily) {
+        new Quest({
+            name: daily.name
+        }).save().catch(function (err) {
+            console.log('ERROR - Unable to save generated daily - ', err);
         });
+    });
+    return dailies;
+}
 
+function inflateQuest(dbQuest) {
+    var quest = {};
+    if (dbQuest && dbQuest.name) {
+        quest = questsMap[dbQuest.name];
+    }
+    quest.status = dbQuest.status;
+    quest.progress = dbQuest.progress;
+    quest.id = dbQuest.id;
     return quest;
 }
 
-function questType() {
-    return chance.pickone([
-        'hunt',
-        'gather'
-    ]);
-}
-
-function questTarget(type) {
-    var target = {};
-    if (type === 'hunt') {
-        target.type = chance.pickone([
-            54, //zombie
-            51, //skeleton
-            50, //creeper
-            52 //spider
-        ]);
-        target.quantity = 10;
-    } else if (type === 'gather') {
-        target = chance.pickone([
-            {
-                type: 265, //iron ingot
-                quantity: 20
-            },
-            {
-                type: 266, //gold ingot
-                quantity: 15
-            },
-            {
-                type: 263, //coal
-                quantity: 30
-            },
-            {
-                type: 331, //redstone
-                quantity: 30
-            },
-            {
-                type: 388, //emerald
-                quantity: 5
-            }
-        ]);
-    }
-
-    return target;
-}
-
-function questReward() {
-    var multiplier = chance.normal({
-        mean: 1,
-        dev: 0.2
+function inflateQuests(dbQuests) {
+    var quests = [];
+    dbQuests.forEach(function (dbQuest) {
+        quests.push(inflateQuest(dbQuest));
     });
-    return chance.pickone([{
-        type: 384, //bottle o' enchanting
-        quantity: Math.round(multiplier * 30)
-    }, {
-      type: 264, //diamonds! yay!
-      quantity: Math.round(multiplier * 4)
-    }]);
-}
-
-function generate(quantity) {
-    if (quantity === undefined) {
-        return generateQuest();
-    } else {
-        return generateQuests(quantity);
-    }
+    return quests;
 }
 
 module.exports = {
-    generate: generate,
-    generateQuests: generateQuests,
-    generateQuest: generateQuest,
-    generateDailies: generateDailies
+    generateDailies: generateDailies,
+    inflateQuest: inflateQuest,
+    inflateQuests: inflateQuests
 };

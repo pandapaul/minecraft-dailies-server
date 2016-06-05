@@ -1,0 +1,13 @@
+{
+    "name": "Ranged Ragers",
+    "description": "Kill 10 Skeletons",
+    "type": "hunt",
+    "target": {
+        "type": 51,
+        "quantity": 10
+    },
+    "reward": {
+        "type": 384,
+        "quantity": 30
+    }
+}

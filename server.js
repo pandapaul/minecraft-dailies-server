@@ -4,6 +4,7 @@ var app = express();
 var quests = require('./routes/quests');
 var users = require('./routes/users');
 var db = require('./db');
+var questLoader = require('./questLoader');
 
 routes();
 connectToDb()

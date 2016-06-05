@@ -2,19 +2,19 @@ var db = require('./db');
 var questGenerator = require('./questGenerator');
 
 function fetchQuestInventory(username) {
-    var questInventory = {};
+    var questInventoryMap = {};
     return fetchDailies()
         .then(function (dailies) {
             dailies.forEach(function (quest) {
                 quest.status = 'available';
-                questInventory[quest.id] = quest;
+                questInventoryMap[quest.id] = quest;
             });
             return db.progression.findForUserAndQuests(username, dailies);
         })
         .then(function (dailyProgressions) {
             dailyProgressions.forEach(function (progression) {
                 if (progression.status === 'complete') {
-                    delete questInventory[progression.quest];
+                    delete questInventoryMap[progression.quest];
                 }
             });
         })
@@ -28,10 +28,15 @@ function fetchQuestInventory(username) {
             acceptedProgressions.forEach(function (progression) {
                 progression.quest.status = progression.status;
                 progression.quest.progress = progression.progress;
-                questInventory[progression.quest.id] = progression.quest;
+                questInventoryMap[progression.quest.id] = progression.quest;
             });
-            var questArray = [];
-
+            var questInventory = [];
+            for (var quest in questInventoryMap) {
+                if (!questInventoryMap.hasOwnProperty(quest)) {
+                    continue;
+                }
+                questInventory.push(questGenerator.inflateQuest(questInventoryMap[quest]));
+            }
             return questInventory;
         });
 }
@@ -40,7 +45,7 @@ function fetchDailies() {
     return db.quest.findTodaysQuests()
         .then(function (quests) {
             if (quests && quests.length) {
-                return quests;
+                return questGenerator.inflateQuests(quests);
             } else {
                 return questGenerator.generateDailies();
             }
@@ -48,7 +53,10 @@ function fetchDailies() {
 }
 
 function fetchQuestById(questId) {
-    return db.quest.findByQuestId(questId);
+    return db.quest.findByQuestId(questId)
+        .then(function (quest) {
+            return questGenerator.inflateQuest(quest);
+        });
 }
 
 module.exports = {

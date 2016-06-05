@@ -1,0 +1,13 @@
+{
+    "name": "Dripping in Gold",
+    "description": "Gather 15 Gold Ingots",
+    "type": "gather",
+    "target": {
+        "type": 266,
+        "quantity": 15
+    },
+    "reward": {
+        "type": 264,
+        "quantity": 3
+    }
+}
