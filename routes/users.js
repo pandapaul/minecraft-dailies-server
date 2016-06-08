@@ -11,8 +11,7 @@ var db = require('../db');
  * @apiVersion 1.0.0
  */
 router.get('/', function (req, res) {
-    // TODO add fetching for user info
-    res.send("Hey what's up?  You asked for user " + req.params.username + ". This is only a placeholder, though.");
+    res.sendfile('../static/userProfile/index.html');
 });
 
 /**
