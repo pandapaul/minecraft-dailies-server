@@ -26,10 +26,20 @@ $(function () {
 			questElement.find('.quest-type').addClass(quest.type);
 			questElement.find('.quest-name').text(quest.name);
 			questElement.find('.quest-description').text(quest.description);
-			questElement.find('.quest-status').text(quest.status);
+			questElement.find('.quest-status').text(formatQuestStatus(quest.status));
 			questElement.appendTo(questListElement);
 		});
 	}
+	
+	function formatQuestStatus(status) {
+		return questStatusMap[status] || status;
+	}
+	
+	var questStatusMap = {
+		available: 'Available',
+		accepted: 'Accepted',
+		complete: 'Complete'
+	};
 
 	function fetchActivities() {
 		return $.get('activities');
