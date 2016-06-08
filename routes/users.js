@@ -4,15 +4,14 @@ var router = express.Router({
 });
 var quests = require('./quests');
 var db = require('../db');
+var path = require('path');
 
 /**
  * @api {post} /:username/ Get a User's Profile
  * @apiGroup Users
  * @apiVersion 1.0.0
  */
-router.get('/', function (req, res) {
-    res.sendfile('../static/userProfile/index.html');
-});
+router.use('/', express.static('static/userProfile'));
 
 /**
  * @api {post} /:username/:activities Get a User's Activities

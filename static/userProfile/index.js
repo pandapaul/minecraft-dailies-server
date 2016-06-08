@@ -1,8 +1,10 @@
 $(function () {
 	var questTemplate = $('.quest.template').removeClass('template').remove();
-	var actitivtyTemplate = $('.activity.temlate').removeClass('template').remove();
+	var actitivtyTemplate = $('.activity.template').removeClass('template').remove();
 	var questListElement = $('.quest-list');
+	var activityListElement = $('.activity-list');
 	var username = location.pathname.replace(/\//g,'');
+	$('.prepend-username').prepend(username + '\'s ');
 
 	fetchQuests()
 	.then(buildQuestList);
@@ -11,7 +13,7 @@ $(function () {
 	.then(buildActivityList);
 
 	function fetchQuests() {
-		return $.get(username + '/quests');
+		return $.get('quests');
 	}
 
 	function buildQuestList(quests) {
@@ -30,7 +32,7 @@ $(function () {
 	}
 
 	function fetchActivities() {
-		return $.get(username + '/activities');
+		return $.get('activities');
 	}
 
 	function buildActivityList(activities) {
@@ -39,7 +41,22 @@ $(function () {
 		}
 
 		$.each(activities, function (index, activity) {
-			
+			var activityElement = actitivtyTemplate.clone();
+			activityElement.find('.activity-action').addClass(activity.action).text(formatAction(activity.action));
+			activityElement.find('.activity-quest-name').text((activity.quest && activity.quest.name) || 'Unnamed Quest');
+			activityElement.find('.activity-date').text(moment(activity.date).fromNow());
+			activityElement.appendTo(activityListElement);
 		});
 	}
+	
+	function formatAction(action) {
+		return actionMap[action] || action;
+	}
+	
+	var actionMap = {
+		accept: 'Accepted',
+		abandon: 'Abandoned',
+		complete: 'Completed',
+		progress: 'Progressed'
+	};
 });
