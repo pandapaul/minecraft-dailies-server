@@ -36,7 +36,7 @@ $(function () {
 	}
 
 	function buildActivityList(activities) {
-		if (!activities) {
+		if (!activities || !activities.length) {
 			activityListElement.text('None');
 		}
 
