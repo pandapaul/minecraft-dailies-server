@@ -37,7 +37,7 @@ $(function () {
 
 	function buildActivityList(activities) {
 		if (!activities) {
-			return;
+			activityListElement.text('None');
 		}
 
 		$.each(activities, function (index, activity) {
