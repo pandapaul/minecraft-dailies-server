@@ -116,14 +116,14 @@ router.post('/:questId/accept', function (req, res, next) {
 });
 
 /**
- * @api {post} /:username/quests/:questId/progress Update Quest Progress
+ * @api {post} /:username/quests/:questId/progress/:progress Update Quest Progress
  * @apiGroup Quests
  * @apiVersion 1.0.0
  */
-router.post('/:questId/progress', function (req, res, next) {
+router.post('/:questId/progress/:progress', function (req, res, next) {
     var username = req.params.username || req.body.username;
     var questId = req.params.questId;
-    var progress = req.body.progress;
+    var progress = req.params.progress || req.body.progress;
 
     if (!progress) {
         next('Invalid progress [' + progress + ']');
