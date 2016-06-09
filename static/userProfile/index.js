@@ -27,11 +27,11 @@ $(function () {
 			questElement.find('.quest-name').text(quest.name);
 			questElement.find('.quest-description').text(quest.description);
 			if (quest.progress && quest.status === 'accepted') {
-				questElement.find('.quest-status').text(quest.progress + ' of ' + quest.reward.quantity + ' ' + formatQuestType(quest.type));
+				questElement.find('.quest-status').text(quest.progress + ' of ' + quest.target.quantity + ' ' + formatQuestType(quest.type));
 			} else {
 				questElement.find('.quest-status').text(formatQuestStatus(quest.status));
 			}
-			questElement.find('.quest-progress-bar').width(Math.round(100 * (quest.progress || 0) / quest.reward.quantity) + '%');
+			questElement.find('.quest-progress-bar').width(Math.round(100 * (quest.progress || 0) / quest.target.quantity) + '%');
 			questElement.appendTo(questListElement);
 		});
 	}
