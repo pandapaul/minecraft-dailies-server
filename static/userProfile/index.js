@@ -27,7 +27,7 @@ $(function () {
 			questElement.find('.quest-name').text(quest.name);
 			questElement.find('.quest-description').text(quest.description);
 			if (quest.progress && quest.status === 'accepted') {
-				questElement.find('.quest-status').text(quest.progress + '/' + quest.reward.quantity);
+				questElement.find('.quest-status').text(quest.progress + ' of ' + quest.reward.quantity + ' ' + formatQuestType(quest.type));
 			} else {
 				questElement.find('.quest-status').text(formatQuestStatus(quest.status));
 			}
@@ -35,6 +35,15 @@ $(function () {
 			questElement.appendTo(questListElement);
 		});
 	}
+
+	function formatQuestType(type) {
+		return questTypeMap[type] || type;
+	}
+
+	var questTypeMap = {
+		'hunt': 'Killed',
+		'gather': 'Gathered'
+	};
 
 	function formatQuestStatus(status) {
 		return questStatusMap[status] || status;
