@@ -9,8 +9,15 @@ var activitySchema = mongoose.Schema({
 });
 
 activitySchema.statics.findForUser = function (username) {
+    var usernameRegex;
+    try {
+        usernameRegex = new RegExp('^' + username + '$','i');
+    } catch (err) {
+        return [];
+    }
+    
     return this.find({
-        username: username
+        username: usernameRegex
     }).sort({
         date: 'descending'
     }).populate('quest');

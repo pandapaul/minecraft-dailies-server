@@ -1,8 +1,8 @@
 $(function () {
 	var questTemplate = $('.quest.template').removeClass('template').remove();
 	var actitivtyTemplate = $('.activity.template').removeClass('template').remove();
-	var questListElement = $('.quest-list');
-	var activityListElement = $('.activity-list');
+	var questListElement = $('.quest-list').hide();
+	var activityListElement = $('.activity-list').hide();
 	var username = location.pathname.replace(/\//g,'');
 	$('.prepend-username').prepend(username + '\'s ');
 
@@ -34,6 +34,7 @@ $(function () {
 			questElement.find('.quest-progress-bar').width(Math.round(100 * (quest.progress || 0) / quest.target.quantity) + '%');
 			questElement.appendTo(questListElement);
 		});
+		questListElement.show();
 	}
 
 	function formatQuestType(type) {
@@ -71,6 +72,7 @@ $(function () {
 			activityElement.find('.activity-date').text(moment(activity.date).fromNow());
 			activityElement.appendTo(activityListElement);
 		});
+		activityListElement.show();
 	}
 
 	function formatAction(action) {

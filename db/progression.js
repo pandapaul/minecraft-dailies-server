@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
+var usernameRegexer = require('./usernameRegexer');
 
 var progressionSchema = mongoose.Schema({
     username: String,
@@ -19,15 +20,29 @@ progressionSchema.statics.findForUserAndQuests = function (username, quests) {
     } else {
         questIds = quests || [];
     }
+    
+    var usernameRegex;
+    try {
+        usernameRegex = usernameRegexer(username);
+    } catch (err) {
+        return [];
+    }
 
     return this.find({
-        username: username
+        username: usernameRegex
     }).where('quest').in(questIds);
 };
 
 progressionSchema.statics.findForUserAndQuest = function (username, questId) {
+    var usernameRegex;
+    try {
+        usernameRegex = usernameRegexer(username);
+    } catch (err) {
+        return null;
+    }
+    
     return this.findOne({
-        username: username,
+        username: usernameRegex,
         quest: questId
     });
 };

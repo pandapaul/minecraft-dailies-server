@@ -1,8 +1,15 @@
 var db = require('./db');
 var questGenerator = require('./questGenerator');
+var usernameRegexer = require('./db/usernameRegexer');
 
 function fetchQuestInventory(username) {
     var questInventoryMap = {};
+    var usernameRegex;
+    try {
+        usernameRegex = usernameRegexer(username);
+    } catch (err) {
+        return [];
+    }
     return fetchDailies()
         .then(function (dailies) {
             dailies.forEach(function (quest) {
@@ -20,7 +27,7 @@ function fetchQuestInventory(username) {
         })
         .then(function () {
             return db.progression.find({
-                username: username,
+                username: usernameRegex,
                 status: 'accepted'
             }).populate('quest');
         })
