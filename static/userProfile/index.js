@@ -3,14 +3,17 @@ $(function () {
 	var actitivtyTemplate = $('.activity.template').removeClass('template').remove();
 	var questListElement = $('.quest-list').hide();
 	var activityListElement = $('.activity-list').hide();
+	var characterRender = $('.character-render').hide();
 	var username = location.pathname.replace(/\//g,'');
-	$('.prepend-username').prepend(username + '\'s ');
+	$('.profile-name').text(username.toUpperCase());
 
 	fetchQuests()
 	.then(buildQuestList);
 
 	fetchActivities()
 	.then(buildActivityList);
+	
+	setupCharacterRender();
 
 	function fetchQuests() {
 		return $.get('quests');
@@ -62,7 +65,7 @@ $(function () {
 
 	function buildActivityList(activities) {
 		if (!activities || !activities.length) {
-			activityListElement.append('None');
+			activityListElement.append('No recent activity');
 		}
 
 		$.each(activities, function (index, activity) {
@@ -85,4 +88,8 @@ $(function () {
 		complete: 'Completed',
 		progress: 'Progressed'
 	};
+	
+	function setupCharacterRender() {
+		characterRender.attr('src','https://crafatar.com/renders/body/' + username + '?overlay&scale=5').show();
+	}
 });

@@ -102,3 +102,14 @@ a:hover {
 .template {
     display: none;
 }
+
+.activity-list {
+    vertical-align: top;
+    text-align: left;
+    margin-left: 1em;
+    display: inline-block;
+}
+
+.profile-name {
+    
+}
