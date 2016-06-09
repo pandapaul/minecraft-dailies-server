@@ -26,15 +26,20 @@ $(function () {
 			questElement.find('.quest-type').addClass(quest.type);
 			questElement.find('.quest-name').text(quest.name);
 			questElement.find('.quest-description').text(quest.description);
-			questElement.find('.quest-status').text(formatQuestStatus(quest.status));
+			if (quest.progress && quest.status === 'accepted') {
+				questElement.find('.quest-status').text(quest.progress + '/' + quest.reward.quantity);
+			} else {
+				questElement.find('.quest-status').text(formatQuestStatus(quest.status));
+			}
+			questElement.find('.quest-progress-bar').width(Math.round(100 * (quest.progress || 0) / quest.reward.quantity) + '%');
 			questElement.appendTo(questListElement);
 		});
 	}
-	
+
 	function formatQuestStatus(status) {
 		return questStatusMap[status] || status;
 	}
-	
+
 	var questStatusMap = {
 		available: 'Available',
 		accepted: 'Accepted',
@@ -58,11 +63,11 @@ $(function () {
 			activityElement.appendTo(activityListElement);
 		});
 	}
-	
+
 	function formatAction(action) {
 		return actionMap[action] || action;
 	}
-	
+
 	var actionMap = {
 		accept: 'Accepted',
 		abandon: 'Abandoned',

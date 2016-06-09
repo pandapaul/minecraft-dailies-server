@@ -75,6 +75,30 @@ a:hover {
 
 }
 
+.quest-progress {
+    background-color: rgba(22, 104, 90, 0.3);
+    border-top: 1px solid rgba(22, 104, 90, 0.3);
+    text-align: left;
+    height: 1.25em;
+    margin: 0.5em -1em -1em -1em;
+    position: relative;
+}
+
+.quest-status {
+    position: absolute;
+    right: 0.25em;
+    color: #fff;
+}
+
+.quest-progress.none {
+    background-color: transparent;
+}
+
+.quest-progress-bar {
+    background-color: rgba(22, 104, 90, 0.3);
+    height: 100%;
+}
+
 .template {
     display: none;
 }
