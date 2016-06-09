@@ -62,7 +62,7 @@ $(function () {
 
 	function buildActivityList(activities) {
 		if (!activities || !activities.length) {
-			activityListElement.text('None');
+			activityListElement.append('None');
 		}
 
 		$.each(activities, function (index, activity) {
