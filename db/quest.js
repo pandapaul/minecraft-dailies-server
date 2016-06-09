@@ -22,7 +22,7 @@ questSchema.set('toJSON', {
 questSchema.statics.findTodaysQuests = function () {
     return this.find({
         createdAt: {
-            $gte: new Date().setUTCHours(0)
+            $gte: new Date().setHours(0)
         }
     });
 };
