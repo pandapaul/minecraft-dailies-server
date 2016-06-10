@@ -32,7 +32,14 @@ a:hover {
 }
 
 .quest-list {
-    margin-top: 1em;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.user-profile .quest-list {
+    margin-top: -1em;
+    max-width: 60em;
+    text-align: left;
 }
 
 .quest {
@@ -103,13 +110,30 @@ a:hover {
     display: none;
 }
 
+.character-render {
+    margin-bottom: 1em;
+    margin-right: 2em;
+}
+
+.activity-container {
+    margin-bottom: 1em;
+    margin-right: 1em;
+    max-width: 40em;
+    display: inline-block;
+    vertical-align: top;
+}
+
 .activity-list {
     vertical-align: top;
     text-align: left;
-    margin-left: 1em;
     display: inline-block;
 }
 
 .profile-name {
-    
+    text-align: left;
+    background-color: rgba(0,0,0,0.15);
+    padding-left: 1em;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+    border-radius: 7px;
 }
