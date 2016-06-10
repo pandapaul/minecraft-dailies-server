@@ -20,9 +20,11 @@ questSchema.set('toJSON', {
 });
 
 questSchema.statics.findTodaysQuests = function () {
+    var now = new Date();
+    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     return this.find({
         createdAt: {
-            $gte: new Date().setHours(0)
+            $gte: today
         }
     });
 };
