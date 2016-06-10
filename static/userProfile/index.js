@@ -12,7 +12,7 @@ $(function () {
 
 	fetchActivities()
 	.then(buildActivityList);
-	
+
 	setupCharacterRender();
 
 	function fetchQuests() {
@@ -25,7 +25,7 @@ $(function () {
 		}
 
 		$.each(quests, function (index, quest) {
-			var questElement = questTemplate.clone();
+			var questElement = questTemplate.clone().addClass(quest.status);
 			questElement.find('.quest-type').addClass(quest.type);
 			questElement.find('.quest-name').text(quest.name);
 			questElement.find('.quest-description').text(quest.description);
@@ -88,7 +88,7 @@ $(function () {
 		complete: 'Completed',
 		progress: 'Progressed'
 	};
-	
+
 	function setupCharacterRender() {
 		characterRender.attr('src','https://crafatar.com/renders/body/' + username + '?overlay&scale=5').show();
 	}

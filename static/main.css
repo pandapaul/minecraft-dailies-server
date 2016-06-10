@@ -91,6 +91,11 @@ a:hover {
     position: relative;
 }
 
+.available .quest-progress {
+    background-color: rgba(104, 104, 104, 0.3);
+    border-top: 1px solid rgba(104, 104, 104, 0.3);
+}
+
 .quest-status {
     position: absolute;
     right: 0.25em;
