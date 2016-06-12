@@ -4,6 +4,8 @@
 <title>Minecraft Dailies</title>
 <link rel="stylesheet" type="text/css" href="main.css"/>
 <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9, user-scalable=no">
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="index.js" type="text/javascript"></script>
 <script src="analytics.js" type="text/javascript"></script>
 </head>
 
@@ -11,10 +13,25 @@
 
 <div class="content-middle">
     <h1>Minecraft Dailies</h1>
-    <a href="/quests">Dailies</a>
-    <a href="/questList">All Quests</a>
+    <a href="/questList">Dailies</a>
     <a href="/docs">API</a>
     <a href="http://www.github.com/pandapaul/minecraft-dailies-server">Source</a>
+
+    <div class="quest-list">
+        <h3>Today's Dailies</h3>
+        <div class="quest template">
+            <div class="quest-type"></div>
+            <div class="quest-text-wrapper">
+                <div class="quest-name"></div>
+                <div class="quest-description"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="user-search">
+        <input type="text"/>
+    </div>
+
 </div>
 
 </body>
