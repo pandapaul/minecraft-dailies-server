@@ -1,0 +1,13 @@
+{
+    "name": "Hey is for Horses",
+    "description": "Gather 64 Hay Bales",
+    "type": "gather",
+    "target": {
+        "type": 170,
+        "quantity": 64
+    },
+    "reward": {
+        "type": 388,
+        "quantity": 32
+    }
+}

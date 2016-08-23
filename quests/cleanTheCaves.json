@@ -1,0 +1,13 @@
+{
+    "name": "Clean the Caves",
+    "description": "Kill 8 Bats",
+    "type": "hunt",
+    "target": {
+        "type": 65,
+        "quantity": 8
+    },
+    "reward": {
+        "type": 264,
+        "quantity": 4
+    }
+}
