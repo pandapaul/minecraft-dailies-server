@@ -1,0 +1,13 @@
+{
+    "name": "Stay Lucky",
+    "description": "Gather 4 Rabbit's Feet",
+    "type": "gather",
+    "target": {
+        "type": 414,
+        "quantity": 4
+    },
+    "reward": {
+        "type": 388,
+        "quantity": 16
+    }
+}

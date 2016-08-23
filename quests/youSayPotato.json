@@ -1,0 +1,13 @@
+{
+    "name": "You Say Potato, I Say X_X",
+    "description": "Gather 16 Poisonous Potatoes",
+    "type": "gather",
+    "target": {
+        "type": 394,
+        "quantity": 16
+    },
+    "reward": {
+        "type": 388,
+        "quantity": 16
+    }
+}
