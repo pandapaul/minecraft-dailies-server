@@ -3,7 +3,8 @@
     "description": "Gather a Wither Skeleton Skull",
     "type": "gather",
     "target": {
-        "type": 397:1,
+        "type": 397,
+        "subType": 1,
         "quantity": 64
     },
     "reward": {
