@@ -1,0 +1,13 @@
+{
+    "name": "Ghastly Fear",
+    "description": "Gather a Ghast Tear",
+    "type": "gather",
+    "target": {
+        "type": 370,
+        "quantity": 1
+    },
+    "reward": {
+        "type": 264,
+        "quantity": 8
+    }
+}

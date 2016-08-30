@@ -1,0 +1,14 @@
+{
+    "name": "Wither Wrath",
+    "description": "Gather a Wither Skeleton Skull",
+    "type": "gather",
+    "target": {
+        "type": 397,
+        "subType": 1,
+        "quantity": 1
+    },
+    "reward": {
+        "type": 264,
+        "quantity": 32
+    }
+}

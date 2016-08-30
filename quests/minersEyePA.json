@@ -1,0 +1,13 @@
+{
+    "name": "Miner's EyePA",
+    "description": "Craft 16 Fermented Spider Eyes",
+    "type": "gather",
+    "target": {
+        "type": 376,
+        "quantity": 16
+    },
+    "reward": {
+        "type": 388,
+        "quantity": 16
+    }
+}

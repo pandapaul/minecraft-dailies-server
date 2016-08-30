@@ -1,0 +1,13 @@
+{
+    "name": "Just Beat It",
+    "description": "Gather 64 Beetroots",
+    "type": "gather",
+    "target": {
+        "type": 434,
+        "quantity": 64
+    },
+    "reward": {
+        "type": 388,
+        "quantity": 32
+    }
+}

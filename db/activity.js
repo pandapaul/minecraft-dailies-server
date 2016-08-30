@@ -15,10 +15,10 @@ activitySchema.statics.findForUser = function (username) {
     } catch (err) {
         return [];
     }
-    
+
     return this.find({
         username: usernameRegex
-    }).sort({
+    }).limit(15).sort({
         date: 'descending'
     }).populate('quest');
 };

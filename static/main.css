@@ -76,6 +76,10 @@ a:hover {
 
 .quest-name {
     font-size: 1.5em;
+    max-width: 13.5em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .quest-description {
