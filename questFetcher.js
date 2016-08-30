@@ -5,11 +5,13 @@ var usernameRegexer = require('./db/usernameRegexer');
 function fetchQuestInventory(username) {
     var questInventoryMap = {};
     var usernameRegex;
+
     try {
         usernameRegex = usernameRegexer(username);
     } catch (err) {
         return [];
     }
+    
     return fetchDailies()
         .then(setDailiesStatusAvailable)
         .then(fetchDailiesProgressions)
@@ -17,6 +19,52 @@ function fetchQuestInventory(username) {
         .then(fetchAcceptedProgressions)
         .then(addAcceptedQuests)
         .then(buildInflatedInventory);
+
+    function setDailiesStatusAvailable(dailies) {
+        dailies.forEach(function (quest) {
+            quest.status = 'available';
+            questInventoryMap[quest.id] = quest;
+        });
+        return dailies;
+    }
+
+    function fetchDailiesProgressions(dailies) {
+        return db.progression.findForUserAndQuests(username, dailies);
+    }
+
+    function removeCompleteDailies(dailyProgressions) {
+        dailyProgressions.forEach(function (progression) {
+            if (progression.status === 'complete') {
+                delete questInventoryMap[progression.quest];
+            }
+        });
+    }
+
+    function fetchAcceptedProgressions() {
+        return db.progression.find({
+            username: usernameRegex,
+            status: 'accepted'
+        }).populate('quest');
+    }
+
+    function addAcceptedQuests(acceptedProgressions) {
+        acceptedProgressions.forEach(function (progression) {
+            progression.quest.status = progression.status;
+            progression.quest.progress = progression.progress;
+            questInventoryMap[progression.quest.id] = progression.quest;
+        });
+    }
+
+    function buildInflatedInventory() {
+        var questInventory = [];
+        for (var quest in questInventoryMap) {
+            if (!questInventoryMap.hasOwnProperty(quest)) {
+                continue;
+            }
+            questInventory.push(questGenerator.inflateQuest(questInventoryMap[quest]));
+        }
+        return questInventory;
+    }
 }
 
 function fetchDailies() {
@@ -28,52 +76,6 @@ function fetchDailies() {
                 return questGenerator.generateDailies();
             }
         });
-}
-
-function setDailiesStatusAvailable(dailies) {
-    dailies.forEach(function (quest) {
-        quest.status = 'available';
-        questInventoryMap[quest.id] = quest;
-    });
-    return dailies;
-}
-
-function fetchDailiesProgressions(dailies) {
-    return db.progression.findForUserAndQuests(username, dailies);
-}
-
-function removeCompleteDailies(dailyProgressions) {
-    dailyProgressions.forEach(function (progression) {
-        if (progression.status === 'complete') {
-            delete questInventoryMap[progression.quest];
-        }
-    });
-}
-
-function fetchAcceptedProgressions() {
-    return db.progression.find({
-        username: usernameRegex,
-        status: 'accepted'
-    }).populate('quest');
-}
-
-function addAcceptedQuests(acceptedProgressions) {
-    acceptedProgressions.forEach(function (progression) {
-        progression.quest.status = progression.status;
-        progression.quest.progress = progression.progress;
-        questInventoryMap[progression.quest.id] = progression.quest;
-    });
-}
-
-function buildInflatedInventory() {
-    var questInventory = [];
-    for (var quest in questInventoryMap) {
-        if (!questInventoryMap.hasOwnProperty(quest)) {
-            continue;
-        }
-        questInventory.push(questGenerator.inflateQuest(questInventoryMap[quest]));
-    }
-    return questInventory;
 }
 
 function fetchQuestById(questId) {
