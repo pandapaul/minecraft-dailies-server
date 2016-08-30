@@ -12,12 +12,21 @@
 <body>
 
 <div class="content-middle">
-    <h1>Minecraft Dailies</h1>
-    <a href="/questList">Dailies</a>
-    <a href="/docs">API</a>
-    <a href="http://www.github.com/pandapaul/minecraft-dailies-server">Source</a>
 
-    <div class="quest-list">
+    <div class="nav">
+        <span class="title">Minecraft Dailies</span>
+        <span class="links">
+            <a href="/questList">Quests</a>
+            <a href="/docs">API</a>
+            <a href="http://www.github.com/pandapaul/minecraft-dailies-server">Source</a>
+        </span>
+    </div>
+
+    <div class="user-search">
+        <input type="text" placeholder="Find a player"/>
+    </div>
+
+    <div class="quest-list" style="display:none">
         <h3>Today's Dailies</h3>
         <div class="quest template">
             <div class="quest-type"></div>
@@ -26,10 +35,6 @@
                 <div class="quest-description"></div>
             </div>
         </div>
-    </div>
-
-    <div class="user-search">
-        <input type="text"/>
     </div>
 
 </div>

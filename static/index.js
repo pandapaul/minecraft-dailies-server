@@ -1,6 +1,10 @@
 $(function () {
+    var userSearch = $('.user-search input')
+    .focus()
+    .keyup(handleSearchKeyup);
     var questTemplate = $('.quest.template').removeClass('template').remove();
     var questListElement = $('.quest-list');
+    var userSearchPattern = new RegExp('[a-zA-Z0-9_-]');
 
     fetchQuests()
     .then(buildQuestList);
@@ -21,5 +25,15 @@ $(function () {
             questElement.find('.quest-description').text(quest.description);
             questElement.appendTo(questListElement);
         });
+    }
+
+    function handleSearchKeyup(event) {
+        if (event.which === 13) {
+            search();
+        }
+    }
+
+    function search() {
+        window.location.pathname = "/" + userSearch.val();
     }
 });
