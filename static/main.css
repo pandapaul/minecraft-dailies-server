@@ -58,6 +58,12 @@ a:hover {
     vertical-align: top;
 }
 
+.quest-list.front-page {
+    max-width: 59em;
+    text-align: left;
+    margin-top: 2.5em;
+}
+
 .user-profile .quest-list {
     margin-top: -1em;
     max-width: 60em;
