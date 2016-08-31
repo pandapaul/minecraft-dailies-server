@@ -1,13 +1,13 @@
 {
     "name": "Fearful Fishing",
-    "description": "Kill 8 Guardians",
+    "description": "Kill 4 Guardians",
     "type": "hunt",
     "target": {
         "type": 68,
-        "quantity": 8
+        "quantity": 4
     },
     "reward": {
         "type": 264,
-        "quantity": 16
+        "quantity": 8
     }
 }

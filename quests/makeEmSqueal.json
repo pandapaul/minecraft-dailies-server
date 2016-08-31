@@ -1,0 +1,13 @@
+{
+    "name": "Make 'Em Squeal",
+    "description": "Kill 16 Zombie Pigman",
+    "type": "hunt",
+    "target": {
+        "type": 57,
+        "quantity": 16
+    },
+    "reward": {
+        "type": 264,
+        "quantity": 8
+    }
+}

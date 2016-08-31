@@ -1,13 +1,13 @@
 {
     "name": "Blazing Bravery",
-    "description": "Kill 32 Blazes",
+    "description": "Kill 16 Blazes",
     "type": "hunt",
     "target": {
         "type": 61,
-        "quantity": 32
+        "quantity": 16
     },
     "reward": {
         "type": 264,
-        "quantity": 16
+        "quantity": 4
     }
 }

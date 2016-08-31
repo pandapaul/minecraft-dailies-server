@@ -1,13 +1,13 @@
 {
     "name": "Rod Roundup",
-    "description": "Gather 64 End Rods",
+    "description": "Gather 16 End Rods",
     "type": "gather",
     "target": {
         "type": 198,
-        "quantity": 64
+        "quantity": 16
     },
     "reward": {
         "type": 388,
-        "quantity": 32
+        "quantity": 16
     }
 }

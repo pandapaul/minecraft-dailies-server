@@ -1,5 +1,5 @@
 {
-    "name": "Just Beat It",
+    "name": "Just Beet It",
     "description": "Gather 64 Beetroots",
     "type": "gather",
     "target": {
@@ -8,6 +8,6 @@
     },
     "reward": {
         "type": 388,
-        "quantity": 32
+        "quantity": 8
     }
 }
