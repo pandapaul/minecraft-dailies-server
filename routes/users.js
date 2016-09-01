@@ -4,7 +4,6 @@ var router = express.Router({
 });
 var quests = require('./quests');
 var db = require('../db');
-var path = require('path');
 
 /**
  * @api {get} /:username/ Get a User's Profile

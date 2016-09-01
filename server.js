@@ -5,6 +5,7 @@ var quests = require('./routes/quests');
 var users = require('./routes/users');
 var db = require('./db');
 var questLoader = require('./questLoader');
+var stats = require('./routes/stats');
 
 routes();
 connectToDb()
@@ -16,6 +17,7 @@ function routes() {
     app.use(bodyParser.json());
     app.use('/quests', quests);
     app.use('/:username', users);
+    app.use('/stats', stats);
     app.use(basicErrorHandling);
 }
 

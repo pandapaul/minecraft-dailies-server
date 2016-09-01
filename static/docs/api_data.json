@@ -91,6 +91,26 @@
   },
   {
     "type": "get",
+    "url": "/completions",
+    "title": "Get a count of quest completions",
+    "group": "Stats",
+    "version": "1.0.0",
+    "filename": "routes/stats.js",
+    "groupTitle": "Stats",
+    "name": "GetCompletions"
+  },
+  {
+    "type": "get",
+    "url": "/users",
+    "title": "Get a count of users who have progressions",
+    "group": "Stats",
+    "version": "1.0.0",
+    "filename": "routes/stats.js",
+    "groupTitle": "Stats",
+    "name": "GetUsers"
+  },
+  {
+    "type": "get",
     "url": "/:username/",
     "title": "Get a User's Profile",
     "group": "Users",

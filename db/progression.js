@@ -54,6 +54,22 @@ progressionSchema.statics.upsert = function (progression) {
     }, progression, {upsert: true});
 };
 
+progressionSchema.statics.countCompletions = function (username) {
+    var filter = {
+        status: 'complete'
+    };
+    
+    if (username !== undefined) {
+        filter.username = username;
+    }
+    
+    return this.count(filter);
+};
+
+progressionSchema.statics.countUsers = function (username) {
+    return this.distinct('username').count();
+};
+
 progressionSchema.set('toJSON', {
     transform: function (doc, ret, options) {
         ret.id = ret._id;
