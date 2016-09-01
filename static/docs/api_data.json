@@ -1,16 +1,6 @@
 [
   {
     "type": "get",
-    "url": "/:questId",
-    "title": "Get a Specific Quest",
-    "group": "Quests",
-    "version": "1.0.0",
-    "filename": "routes/quests.js",
-    "groupTitle": "Quests",
-    "name": "GetQuestid"
-  },
-  {
-    "type": "get",
     "url": "/quests",
     "title": "Get All Quests",
     "group": "Quests",
@@ -21,13 +11,23 @@
   },
   {
     "type": "get",
-    "url": "/:username/:questId",
+    "url": "/quests/list",
+    "title": "Get a list of all quests",
+    "group": "Quests",
+    "version": "1.0.0",
+    "filename": "routes/quests.js",
+    "groupTitle": "Quests",
+    "name": "GetQuestsList"
+  },
+  {
+    "type": "get",
+    "url": "/quests/:questId",
     "title": "Get a Specific Quest",
     "group": "Quests",
     "version": "1.0.0",
     "filename": "routes/quests.js",
     "groupTitle": "Quests",
-    "name": "GetUsernameQuestid"
+    "name": "GetQuestsQuestid"
   },
   {
     "type": "get",
@@ -40,63 +40,73 @@
     "name": "GetUsernameQuests"
   },
   {
+    "type": "get",
+    "url": "/:username/quests/:questId",
+    "title": "Get a Specific Quest",
+    "group": "Quests",
+    "version": "1.0.0",
+    "filename": "routes/quests.js",
+    "groupTitle": "Quests",
+    "name": "GetUsernameQuestsQuestid"
+  },
+  {
     "type": "post",
-    "url": "/:username/:questId/abandon",
+    "url": "/:username/quests/:questId/abandon",
     "title": "Abandon a Quest",
     "group": "Quests",
     "version": "1.0.0",
     "filename": "routes/quests.js",
     "groupTitle": "Quests",
-    "name": "PostUsernameQuestidAbandon"
+    "name": "PostUsernameQuestsQuestidAbandon"
   },
   {
     "type": "post",
-    "url": "/:username/:questId/accept",
+    "url": "/:username/quests/:questId/accept",
     "title": "Accept a Quest",
     "group": "Quests",
     "version": "1.0.0",
     "filename": "routes/quests.js",
     "groupTitle": "Quests",
-    "name": "PostUsernameQuestidAccept"
+    "name": "PostUsernameQuestsQuestidAccept"
   },
   {
     "type": "post",
-    "url": "/:username/:questId/accept",
+    "url": "/:username/quests/:questId/accept",
     "title": "Complete a Quest",
     "group": "Quests",
     "version": "1.0.0",
     "filename": "routes/quests.js",
     "groupTitle": "Quests",
-    "name": "PostUsernameQuestidAccept"
+    "name": "PostUsernameQuestsQuestidAccept"
   },
   {
     "type": "post",
-    "url": "/:username/:questId/progress",
+    "url": "/:username/quests/:questId/progress/:progress",
     "title": "Update Quest Progress",
     "group": "Quests",
     "version": "1.0.0",
     "filename": "routes/quests.js",
     "groupTitle": "Quests",
-    "name": "PostUsernameQuestidProgress"
+    "name": "PostUsernameQuestsQuestidProgressProgress"
   },
   {
-    "type": "post",
+    "type": "get",
     "url": "/:username/",
     "title": "Get a User's Profile",
     "group": "Users",
     "version": "1.0.0",
     "filename": "routes/users.js",
     "groupTitle": "Users",
-    "name": "PostUsername"
+    "name": "GetUsername"
   },
   {
-    "type": "post",
+    "type": "get",
     "url": "/:username/:activities",
     "title": "Get a User's Activities",
     "group": "Users",
     "version": "1.0.0",
     "filename": "routes/users.js",
     "groupTitle": "Users",
-    "name": "PostUsernameActivities"
+    "name": "GetUsernameActivities"
   }
 ]

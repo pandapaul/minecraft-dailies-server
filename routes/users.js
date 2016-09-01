@@ -7,14 +7,14 @@ var db = require('../db');
 var path = require('path');
 
 /**
- * @api {post} /:username/ Get a User's Profile
+ * @api {get} /:username/ Get a User's Profile
  * @apiGroup Users
  * @apiVersion 1.0.0
  */
 router.use('/', express.static('static/userProfile'));
 
 /**
- * @api {post} /:username/:activities Get a User's Activities
+ * @api {get} /:username/:activities Get a User's Activities
  * @apiGroup Users
  * @apiVersion 1.0.0
  */
