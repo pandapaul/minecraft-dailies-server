@@ -20,7 +20,7 @@ progressionSchema.statics.findForUserAndQuests = function (username, quests) {
     } else {
         questIds = quests || [];
     }
-    
+
     var usernameRegex;
     try {
         usernameRegex = usernameRegexer(username);
@@ -40,7 +40,7 @@ progressionSchema.statics.findForUserAndQuest = function (username, questId) {
     } catch (err) {
         return null;
     }
-    
+
     return this.findOne({
         username: usernameRegex,
         quest: questId
@@ -58,16 +58,18 @@ progressionSchema.statics.countCompletions = function (username) {
     var filter = {
         status: 'complete'
     };
-    
+
     if (username !== undefined) {
         filter.username = username;
     }
-    
+
     return this.count(filter);
 };
 
 progressionSchema.statics.countUsers = function (username) {
-    return this.distinct('username').count();
+    return this.distinct('username').then(function (progressions) {
+        return progressions.length;
+    });
 };
 
 progressionSchema.set('toJSON', {
