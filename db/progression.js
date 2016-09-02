@@ -60,7 +60,11 @@ progressionSchema.statics.countCompletions = function (username) {
     };
 
     if (username !== undefined) {
-        filter.username = username;
+        try {
+            filter.username = usernameRegexer(username);
+        } catch (err) {
+            return null;
+        }
     }
 
     return this.count(filter);
