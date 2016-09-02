@@ -107,7 +107,7 @@ $(function () {
 		if (completions === 0) {
 			statText = 'No Quests Completed';
 		} else if (completions === 1) {
-			statText = '1 Quest Completed';
+			statText = '1 Quest Complete';
 		}
 		return statText;
 	}
