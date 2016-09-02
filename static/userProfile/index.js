@@ -5,6 +5,7 @@ $(function () {
 	var activityListElement = $('.activity-list').hide();
 	var characterRender = $('.character-render').hide();
 	var username = location.pathname.replace(/\//g,'');
+	var headerStats = $('.header .stats');
 	$('.profile-name').text(username.toUpperCase());
 
 	fetchQuests()
@@ -12,6 +13,10 @@ $(function () {
 
 	fetchActivities()
 	.then(buildActivityList);
+
+	fetchStats()
+	.then(buildStatsText)
+	.then(showStats);
 
 	setupCharacterRender();
 
@@ -92,4 +97,23 @@ $(function () {
 	function setupCharacterRender() {
 		characterRender.attr('src','https://crafatar.com/renders/body/' + username + '?overlay&scale=5').show();
 	}
+
+	function fetchStats() {
+		return $.get('/stats/completions');
+	}
+
+	function buildStatsText(completions) {
+		var statText = completions + ' Quests Complete';
+		if (completions === 0) {
+			statText = 'No Quests Completed';
+		} else if (completions === 1) {
+			statText = '1 Quest Completed';
+		}
+		return statText;
+	}
+
+	function showStats(text) {
+		headerStats.text(text);
+	}
+
 });

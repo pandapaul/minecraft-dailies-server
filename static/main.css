@@ -166,13 +166,28 @@ a:hover {
     display: inline-block;
 }
 
-.profile-name {
+.user-profile .header {
     text-align: left;
     background-color: rgba(0,0,0,0.15);
     padding-left: 1em;
-    padding-top: 0.1em;
-    padding-bottom: 0.1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
     border-radius: 7px;
+    position: relative;
+    margin-bottom: 2em;
+}
+
+.user-profile .header .profile-name {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.user-profile .header .stats {
+    position: absolute;
+    font-size: 1.3em;
+    top: 0.75em;
+    right: 0.75em;
 }
 
 .user-search {
@@ -183,7 +198,7 @@ a:hover {
     background: rgba(255,255,255,0.7);
     padding: 0.5em;
     box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.15);
-    
+
 }
 
 .user-search input {
