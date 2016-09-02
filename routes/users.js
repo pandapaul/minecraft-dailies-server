@@ -3,6 +3,7 @@ var router = express.Router({
     mergeParams: true
 });
 var quests = require('./quests');
+var stats = require('./stats');
 var db = require('../db');
 
 /**
@@ -28,5 +29,6 @@ router.get('/activities', function (req, res, next) {
 });
 
 router.use('/quests', quests);
+router.use('/stats', stats);
 
 module.exports = router;

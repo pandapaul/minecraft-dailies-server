@@ -99,7 +99,7 @@ $(function () {
 	}
 
 	function fetchStats() {
-		return $.get('/stats/completions');
+		return $.get('stats/completions');
 	}
 
 	function buildStatsText(completions) {
