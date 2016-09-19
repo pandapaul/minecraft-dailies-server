@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
+var usernameRegexer = require('./usernameRegexer');
 
 var activitySchema = mongoose.Schema({
     username: {type: String, index: true},
@@ -11,9 +12,9 @@ var activitySchema = mongoose.Schema({
 activitySchema.statics.findForUser = function (username) {
     var usernameRegex;
     try {
-        usernameRegex = new RegExp('^' + username + '$','i');
+        usernameRegex = usernameRegexer(username);
     } catch (err) {
-        return [];
+        return Promise.reject([]);
     }
 
     return this.find({

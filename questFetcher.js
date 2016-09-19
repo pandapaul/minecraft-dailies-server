@@ -9,7 +9,8 @@ function fetchQuestInventory(username) {
     try {
         usernameRegex = usernameRegexer(username);
     } catch (err) {
-        return [];
+        console.log(err);
+        return Promise.reject([]);
     }
     
     return fetchDailies()
