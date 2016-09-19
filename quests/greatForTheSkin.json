@@ -1,0 +1,13 @@
+{
+    "name": "Great for the Skin",
+    "description": "Gather 1 Magma Cream",
+    "type": "gather",
+    "target": {
+        "type": 378,
+        "quantity": 1
+    },
+    "reward": {
+        "type": 388,
+        "quantity": 16
+    }
+}

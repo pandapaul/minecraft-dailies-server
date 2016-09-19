@@ -1,0 +1,13 @@
+{
+    "name": "Watch Out for Webs",
+    "description": "Kill 10 Cave Spiders",
+    "type": "hunt",
+    "target": {
+        "type": 59,
+        "quantity": 10
+    },
+    "reward": {
+        "type": 388,
+        "quantity": 32
+    }
+}

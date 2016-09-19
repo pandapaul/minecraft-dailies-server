@@ -1,0 +1,13 @@
+{
+    "name": "Stop Popping Potions",
+    "description": "Kill 2 Witches",
+    "type": "hunt",
+    "target": {
+        "type": 66,
+        "quantity": 2
+    },
+    "reward": {
+        "type": 384,
+        "quantity": 30
+    }
+}

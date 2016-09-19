@@ -1,0 +1,13 @@
+{
+    "name": "Tall, Dark, & Spooky",
+    "description": "Kill 10 Endermen",
+    "type": "hunt",
+    "target": {
+        "type": 58,
+        "quantity": 10
+    },
+    "reward": {
+        "type": 264,
+        "quantity": 5
+    }
+}

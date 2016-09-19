@@ -1,0 +1,13 @@
+{
+    "name": "Sorta Like Fish",
+    "description": "Kill 10 Silverfish",
+    "type": "hunt",
+    "target": {
+        "type": 60,
+        "quantity": 10
+    },
+    "reward": {
+        "type": 264,
+        "quantity": 5
+    }
+}

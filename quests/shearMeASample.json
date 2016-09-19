@@ -1,0 +1,13 @@
+{
+    "name": "Shear Me a Sample",
+    "description": "Gather 64 Wool",
+    "type": "gather",
+    "target": {
+        "type": 35,
+        "quantity": 64
+    },
+    "reward": {
+        "type": 384,
+        "quantity": 30
+    }
+}

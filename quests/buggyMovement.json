@@ -1,0 +1,13 @@
+{
+    "name": "Buggy Movement",
+    "description": "Kill an Endermite",
+    "type": "hunt",
+    "target": {
+        "type": 67,
+        "quantity": 1
+    },
+    "reward": {
+        "type": 421,
+        "quantity": 1
+    }
+}

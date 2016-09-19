@@ -1,0 +1,13 @@
+{
+    "name": "Anti-Air Nightmares",
+    "description": "Kill 3 Ghasts",
+    "type": "hunt",
+    "target": {
+        "type": 56,
+        "quantity": 3
+    },
+    "reward": {
+        "type": 384,
+        "quantity": 45
+    }
+}

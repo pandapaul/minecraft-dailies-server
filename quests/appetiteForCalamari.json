@@ -1,0 +1,13 @@
+{
+    "name": "Appetite for Calamari",
+    "description": "Kill 20 Squid",
+    "type": "hunt",
+    "target": {
+        "type": 94,
+        "quantity": 20
+    },
+    "reward": {
+        "type": 384,
+        "quantity": 30
+    }
+}

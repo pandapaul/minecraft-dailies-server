@@ -1,0 +1,13 @@
+{
+    "name": "Cube Crusher",
+    "description": "Kill 12 Magma Cubes",
+    "type": "hunt",
+    "target": {
+        "type": 62,
+        "quantity": 12
+    },
+    "reward": {
+        "type": 64,
+        "quantity": 45
+    }
+}

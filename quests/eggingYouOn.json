@@ -1,0 +1,13 @@
+{
+    "name": "Egging You On",
+    "description": "Gather 32 Eggs",
+    "type": "gather",
+    "target": {
+        "type": 344,
+        "quantity": 32
+    },
+    "reward": {
+        "type": 384,
+        "quantity": 30
+    }
+}

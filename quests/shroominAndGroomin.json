@@ -1,0 +1,13 @@
+{
+    "name": "Shroomin and Groomin",
+    "description": "Gather 16 Red Mushrooms",
+    "type": "gather",
+    "target": {
+        "type": 40,
+        "quantity": 16
+    },
+    "reward": {
+        "type": 388,
+        "quantity": 16
+    }
+}

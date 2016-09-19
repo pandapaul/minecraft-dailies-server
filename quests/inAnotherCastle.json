@@ -1,0 +1,13 @@
+{
+    "name": "In Another Castle",
+    "description": "Kill 8 Wither Skeletons",
+    "type": "hunt",
+    "target": {
+        "type": 51,
+        "quantity": 8
+    },
+    "reward": {
+        "type": 384,
+        "quantity": 45
+    }
+}

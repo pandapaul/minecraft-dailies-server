@@ -1,0 +1,13 @@
+{
+    "name": "Squash the Squishies",
+    "description": "Kill 30 Slimes",
+    "type": "hunt",
+    "target": {
+        "type": 55,
+        "quantity": 30
+    },
+    "reward": {
+        "type": 384,
+        "quantity": 35
+    }
+}
