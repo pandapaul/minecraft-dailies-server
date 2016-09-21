@@ -1,15 +1,16 @@
-var fs = require('fs');
-var questsDirectory = 'quests';
-var quests = [];
+'use strict';
+const fs = require('fs');
+const questsDirectory = 'quests';
+const quests = [];
 
 function load () {
     if (quests.length) {
         return quests;
     }
-    var filenames = fs.readdirSync(questsDirectory);
+    const filenames = fs.readdirSync(questsDirectory);
     filenames.forEach(function (filename) {
-        var fileContents = fs.readFileSync(questsDirectory + '/' + filename, 'utf-8');
-        var quest = JSON.parse(fileContents);
+        const fileContents = fs.readFileSync(questsDirectory + '/' + filename, 'utf-8');
+        const quest = JSON.parse(fileContents);
         quests.push(quest);
     });
     return quests;

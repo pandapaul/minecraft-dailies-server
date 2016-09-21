@@ -1,12 +1,13 @@
-var mongoose = require('mongoose');
-var quest = require('./quest');
-var user = require('./user');
-var activity = require('./activity');
-var progression = require('./progression');
+'use strict';
+const mongoose = require('mongoose');
+const quest = require('./quest');
+const user = require('./user');
+const activity = require('./activity');
+const progression = require('./progression');
 
 function connect() {
     return new Promise(function (resolve, reject) {
-        var db = mongoose.connection;
+        const db = mongoose.connection;
         db.on('error', reject);
         db.once('open', resolve);
         mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/test');

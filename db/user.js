@@ -1,8 +1,9 @@
-var mongoose = require('mongoose');
-var cleanFindModifier = '-_id id';
-var ObjectId = mongoose.Schema.Types.ObjectId;
+'use strict';
+const mongoose = require('mongoose');
+const cleanFindModifier = '-_id id';
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
-var userSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
     username: {type: String, index: {unique: true}},
     quests: {
         inProgress: [{type: ObjectId, ref: 'Quest'}],
@@ -18,6 +19,6 @@ userSchema.statics.findWithQuestsPopulated = function (username) {
     }).populate('quests.inProgress quests.complete');
 };
 
-var userModel = mongoose.model('User', userSchema);
+const userModel = mongoose.model('User', userSchema);
 
 module.exports = userModel;

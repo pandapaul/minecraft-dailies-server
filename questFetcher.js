@@ -1,17 +1,11 @@
-var db = require('./db');
-var questGenerator = require('./questGenerator');
-var usernameRegexer = require('./db/usernameRegexer');
+'use strict';
+const db = require('./db');
+const questGenerator = require('./questGenerator');
+const usernameRegexer = require('./db/usernameRegexer');
 
 function fetchQuestInventory(username, modVersion) {
-    var questInventoryMap = {};
-    var usernameRegex;
-    
-    try {
-        usernameRegex = usernameRegexer(username);
-    } catch (err) {
-        console.log(err);
-        return Promise.reject([]);
-    }
+    const questInventoryMap = {};
+    const usernameRegex = usernameRegexer(username);
     
     return fetchDailies()
         .then(setDailiesStatusAvailable)
@@ -57,8 +51,8 @@ function fetchQuestInventory(username, modVersion) {
     }
 
     function buildInflatedInventory() {
-        var questInventory = [];
-        for (var quest in questInventoryMap) {
+        const questInventory = [];
+        for (let quest in questInventoryMap) {
             if (!questInventoryMap.hasOwnProperty(quest)) {
                 continue;
             }

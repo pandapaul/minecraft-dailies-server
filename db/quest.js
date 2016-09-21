@@ -1,7 +1,8 @@
-var mongoose = require('mongoose');
-var cleanFindModifier = '-_id type target reward';
+'use strict';
+const mongoose = require('mongoose');
+const cleanFindModifier = '-_id type target reward';
 
-var questSchema = mongoose.Schema({
+const questSchema = mongoose.Schema({
     name: String,
     status: String,
     progress: Number
@@ -20,8 +21,8 @@ questSchema.set('toJSON', {
 });
 
 questSchema.statics.findTodaysQuests = function () {
-    var now = new Date();
-    var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     return this.find({
         createdAt: {
             $gte: today
@@ -35,6 +36,6 @@ questSchema.statics.findByQuestId = function (questId) {
     });
 };
 
-var questModel = mongoose.model('Quest', questSchema);
+const questModel = mongoose.model('Quest', questSchema);
 
 module.exports = questModel;

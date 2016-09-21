@@ -1,11 +1,12 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
-var quests = require('./routes/quests');
-var users = require('./routes/users');
-var db = require('./db');
-var questLoader = require('./questLoader');
-var stats = require('./routes/stats');
+'use strict';
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const quests = require('./routes/quests');
+const users = require('./routes/users');
+const db = require('./db');
+const questLoader = require('./questLoader');
+const stats = require('./routes/stats');
 
 routes();
 connectToDb()
@@ -26,7 +27,7 @@ function connectToDb() {
 }
 
 function listen() {
-	var listenPort = process.env.PORT || 5000;
+	const listenPort = process.env.PORT || 5000;
 	app.listen(listenPort);
 	console.log('Listening on port ' + listenPort);
 }

@@ -1,17 +1,18 @@
-var chance = require('chance').Chance();
-var db = require('./db');
-var Quest = db.quest;
-var quests = require('./questLoader').load();
-var questsMap = {};
+'use strict';
+const chance = require('chance').Chance();
+const db = require('./db');
+const Quest = db.quest;
+const quests = require('./questLoader').load();
+const questsMap = {};
 
 quests.forEach(function (quest) {
     questsMap[quest.name] = quest;
 });
 
 function generateDailies() {
-    var dailies = chance.pickset(quests, 5);
+    const dailies = chance.pickset(quests, 5);
     dailies.forEach(function (daily, index) {
-        var dbQuest = new Quest({
+        const dbQuest = new Quest({
             name: daily.name
         });
         dbQuest.save().catch(function (err) {
@@ -23,7 +24,7 @@ function generateDailies() {
 }
 
 function inflateQuest(dbQuest) {
-    var quest = {};
+    let quest = {};
     if (dbQuest && dbQuest.name) {
         quest = questsMap[dbQuest.name];
     }
@@ -34,7 +35,7 @@ function inflateQuest(dbQuest) {
 }
 
 function inflateQuests(dbQuests) {
-    var quests = [];
+    const quests = [];
     dbQuests.forEach(function (dbQuest) {
         quests.push(inflateQuest(dbQuest));
     });

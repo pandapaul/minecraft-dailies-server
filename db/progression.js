@@ -1,8 +1,9 @@
-var mongoose = require('mongoose');
-var ObjectId = mongoose.Schema.Types.ObjectId;
-var usernameRegexer = require('./usernameRegexer');
+'use strict';
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Schema.Types.ObjectId;
+const usernameRegexer = require('./usernameRegexer');
 
-var progressionSchema = mongoose.Schema({
+const progressionSchema = mongoose.Schema({
     username: String,
     quest: {type: ObjectId, ref: 'Quest'},
     status: String,
@@ -12,7 +13,7 @@ var progressionSchema = mongoose.Schema({
 progressionSchema.index({username: 1, quest: 1}, {unique: true});
 
 progressionSchema.statics.findForUserAndQuests = function (username, quests) {
-    var questIds = [];
+    let questIds = [];
     if (quests && quests[0] && quests[0].id) {
         quests.forEach(function (quest, index, array) {
             questIds.push(quest.id);
@@ -21,28 +22,14 @@ progressionSchema.statics.findForUserAndQuests = function (username, quests) {
         questIds = quests || [];
     }
 
-    var usernameRegex;
-    try {
-        usernameRegex = usernameRegexer(username);
-    } catch (err) {
-        return [];
-    }
-
     return this.find({
-        username: usernameRegex
+        username: usernameRegexer(username)
     }).where('quest').in(questIds);
 };
 
 progressionSchema.statics.findForUserAndQuest = function (username, questId) {
-    var usernameRegex;
-    try {
-        usernameRegex = usernameRegexer(username);
-    } catch (err) {
-        return null;
-    }
-
     return this.findOne({
-        username: usernameRegex,
+        username: usernameRegexer(username),
         quest: questId
     });
 };
@@ -54,17 +41,25 @@ progressionSchema.statics.upsert = function (progression) {
     }, progression, {upsert: true});
 };
 
+progressionSchema.statics.countAcceptedQuests = function (username) {
+    const filter = {
+        status: 'accepted'
+    };
+
+    if (username !== undefined) {
+        filter.username = usernameRegexer(username);
+    }
+
+    return this.count(filter);
+};
+
 progressionSchema.statics.countCompletions = function (username) {
-    var filter = {
+    const filter = {
         status: 'complete'
     };
 
     if (username !== undefined) {
-        try {
-            filter.username = usernameRegexer(username);
-        } catch (err) {
-            return null;
-        }
+        filter.username = usernameRegexer(username);
     }
 
     return this.count(filter);
@@ -84,6 +79,6 @@ progressionSchema.set('toJSON', {
     }
 });
 
-var progressionModel = mongoose.model('Progression', progressionSchema);
+const progressionModel = mongoose.model('Progression', progressionSchema);
 
 module.exports = progressionModel;

@@ -1,8 +1,9 @@
-var express = require('express');
-var router = express.Router({
+'use strict';
+const express = require('express');
+const router = express.Router({
     mergeParams: true
 });
-var db = require('../db');
+const db = require('../db');
 
 /**
  * @api {get} /completions Get a count of quest completions

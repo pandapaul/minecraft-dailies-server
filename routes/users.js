@@ -1,10 +1,11 @@
-var express = require('express');
-var router = express.Router({
+'use strict';
+const express = require('express');
+const router = express.Router({
     mergeParams: true
 });
-var quests = require('./quests');
-var stats = require('./stats');
-var db = require('../db');
+const quests = require('./quests');
+const stats = require('./stats');
+const db = require('../db');
 
 /**
  * @api {get} /:username/ Get a User's Profile

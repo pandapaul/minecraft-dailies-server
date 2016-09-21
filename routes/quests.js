@@ -1,12 +1,14 @@
-var express = require('express');
-var router = express.Router({
+'use strict';
+const express = require('express');
+const router = express.Router({
     mergeParams: true
 });
-var questFetcher = require('../questFetcher');
-var questLoader = require('../questLoader');
-var authenticate = require('../authenticate');
-var db = require('../db');
-var Activity = db.activity;
+const questFetcher = require('../questFetcher');
+const questLoader = require('../questLoader');
+const authenticate = require('../authenticate');
+const db = require('../db');
+const Activity = db.activity;
+const maxAcceptableQuests = 1;
 
 router.get('/', function (req, res, next) {
     if (req.params.username) {
@@ -106,8 +108,8 @@ function validateQuestId(questId) {
 }
 
 function fetchQuestStatus(req) {
-    var username = req.params.username;
-    var questId = req.params.questId;
+    const username = req.params.username;
+    const questId = req.params.questId;
     return db.progression.findForUserAndQuest(username, questId)
         .then(function (progression) {
             req.questStatus = progression && progression.status;
@@ -120,18 +122,31 @@ function fetchQuestStatus(req) {
  * @apiVersion 1.0.0
  */
 router.post('/:questId/accept', function (req, res, next) {
-    var username = req.params.username || req.body.username;
-    var questId = req.params.questId;
-    if (!req.questStatus) {
-        updateQuestStatus(username, questId, 'accepted')
-            .then(function () {
-                createActivity(req, res, next, 'accept');
-            })
-            .catch(next);
-    } else {
-        next('Invalid quest status [' + req.questStatus + ']');
-    }
+    const username = req.params.username || req.body.username;
+    const questId = req.params.questId;
+    
+    checkAcceptedQuestLimit(username, next)
+    .then(function () {
+        if (!req.questStatus) {
+            updateQuestStatus(username, questId, 'accepted')
+                .then(function () {
+                    createActivity(req, res, next, 'accept');
+                })
+                .catch(next);
+        } else {
+            throw 'Invalid quest status [' + req.questStatus + ']';
+        }
+    }).catch(next);
 });
+
+function checkAcceptedQuestLimit(username) {
+    return db.progression.countAcceptedQuests(username)
+        .then(function (count) {
+            if (count >= maxAcceptableQuests) {
+                throw 'You\'ve already accepted' + maxAcceptableQuests + 'quests.';
+            }
+        });
+}
 
 /**
  * @api {post} /:username/quests/:questId/progress/:progress Update Quest Progress
@@ -139,12 +154,13 @@ router.post('/:questId/accept', function (req, res, next) {
  * @apiVersion 1.0.0
  */
 router.post('/:questId/progress/:progress', function (req, res, next) {
-    var username = req.params.username || req.body.username;
-    var questId = req.params.questId;
-    var progress = req.params.progress || req.body.progress;
+    const username = req.params.username || req.body.username;
+    const questId = req.params.questId;
+    const progress = req.params.progress || req.body.progress;
 
     if (!progress) {
         next('Invalid progress [' + progress + ']');
+        return;
     }
 
     if (req.questStatus === 'accepted') {
@@ -168,8 +184,8 @@ router.post('/:questId/progress/:progress', function (req, res, next) {
  * @apiVersion 1.0.0
  */
 router.post('/:questId/complete', function (req, res, next) {
-    var username = req.params.username || req.body.username;
-    var questId = req.params.questId;
+    const username = req.params.username || req.body.username;
+    const questId = req.params.questId;
     if (req.questStatus === 'accepted') {
         updateQuestStatus(username, questId, 'complete')
             .then(function () {
@@ -187,8 +203,8 @@ router.post('/:questId/complete', function (req, res, next) {
  * @apiVersion 1.0.0
  */
 router.post('/:questId/abandon', function (req, res, next) {
-    var username = req.params.username || req.body.username;
-    var questId = req.params.questId;
+    const username = req.params.username || req.body.username;
+    const questId = req.params.questId;
     if (req.questStatus === 'accepted') {
         updateQuestStatus(username, questId, null)
             .then(function () {
@@ -217,7 +233,7 @@ function updateQuestProgress(username, questId, progress) {
 }
 
 function createActivity(req, res, next, action) {
-    var activity = new Activity({
+    const activity = new Activity({
         username: req.params.username || req.body.username,
         quest: req.params.questId,
         action: action

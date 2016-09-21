@@ -1,8 +1,9 @@
-var mongoose = require('mongoose');
-var ObjectId = mongoose.Schema.Types.ObjectId;
-var usernameRegexer = require('./usernameRegexer');
+'use strict';
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Schema.Types.ObjectId;
+const usernameRegexer = require('./usernameRegexer');
 
-var activitySchema = mongoose.Schema({
+const activitySchema = mongoose.Schema({
     username: {type: String, index: true},
     quest: {type: ObjectId, ref: 'Quest'},
     action: String,
@@ -10,15 +11,8 @@ var activitySchema = mongoose.Schema({
 });
 
 activitySchema.statics.findForUser = function (username) {
-    var usernameRegex;
-    try {
-        usernameRegex = usernameRegexer(username);
-    } catch (err) {
-        return Promise.reject([]);
-    }
-
     return this.find({
-        username: usernameRegex
+        username: usernameRegexer(username)
     }).limit(15).sort({
         date: 'descending'
     }).populate('quest');
@@ -32,6 +26,6 @@ activitySchema.set('toJSON', {
     }
 });
 
-var activityModel = mongoose.model('Activity', activitySchema);
+const activityModel = mongoose.model('Activity', activitySchema);
 
 module.exports = activityModel;

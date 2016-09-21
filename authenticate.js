@@ -1,4 +1,5 @@
-var yggdrasil = require('yggdrasil')({});
+'use strict';
+const yggdrasil = require('yggdrasil')({});
 
 function authenticate(req) {
     if (!req.body.accessToken) {
