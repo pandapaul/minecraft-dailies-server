@@ -33,6 +33,24 @@ router.get('/', function (req, res, next) {
 });
 
 /**
+ * @api {post} /:username/quests Get Quests for User
+ * @apiGroup Quests
+ * @apiVersion 1.1.0
+ */
+router.post('/', function (req, res, next) {
+    if (!req.params.username) {
+        next('username required when POSTing');
+        return;
+    }
+    questFetcher.fetchQuestInventory(req.params.username, req.body.modVersion)
+        .then(function (quests) {
+            res.json({
+                quests: quests
+            });
+        }).catch(next);
+});
+
+/**
  * @api {get} /quests/list Get a list of all quests
  * @apiGroup Quests
  * @apiVersion 1.0.0

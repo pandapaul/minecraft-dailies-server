@@ -2,10 +2,10 @@ var db = require('./db');
 var questGenerator = require('./questGenerator');
 var usernameRegexer = require('./db/usernameRegexer');
 
-function fetchQuestInventory(username) {
+function fetchQuestInventory(username, modVersion) {
     var questInventoryMap = {};
     var usernameRegex;
-
+    
     try {
         usernameRegex = usernameRegexer(username);
     } catch (err) {
