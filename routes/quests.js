@@ -8,7 +8,7 @@ const questLoader = require('../questLoader');
 const authenticate = require('../authenticate');
 const db = require('../db');
 const Activity = db.activity;
-const maxAcceptableQuests = 1;
+const maxAcceptableQuests = 10;
 
 router.get('/', function (req, res, next) {
     if (req.params.username) {
@@ -143,7 +143,7 @@ function checkAcceptedQuestLimit(username) {
     return db.progression.countAcceptedQuests(username)
         .then(function (count) {
             if (count >= maxAcceptableQuests) {
-                throw 'You\'ve already accepted' + maxAcceptableQuests + 'quests.';
+                throw 'You\'ve already accepted ' + maxAcceptableQuests + ' quests.';
             }
         });
 }
