@@ -1,0 +1,15 @@
+{
+    "name": "It Always Comes Back",
+    "description": "Gather 64 Snow Balls",
+    "type": "gather",
+    "target": {
+        "type": 332,
+        "quantity": 64
+    },
+    "reward": {
+        "type": 438,
+        "nbt": "{Potion:\"minecraft:strong_regeneration\"}",
+        "quantity": 3
+    },
+    "minimumModBuild": 5
+}
