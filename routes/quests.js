@@ -17,7 +17,7 @@ router.get('/', function (req, res, next) {
          * @apiGroup Quests
          * @apiVersion 1.0.0
          */
-        questFetcher.fetchQuestInventory(req.params.username)
+        questFetcher.fetchQuestInventory(req.params.username, req.query.modVersion)
             .then(function (quests) {
                 res.json(quests);
             }).catch(next);
@@ -124,7 +124,7 @@ function fetchQuestStatus(req) {
 router.post('/:questId/accept', function (req, res, next) {
     const username = req.params.username || req.body.username;
     const questId = req.params.questId;
-    
+
     checkAcceptedQuestLimit(username, next)
     .then(function () {
         if (!req.questStatus) {

@@ -21,7 +21,7 @@ $(function () {
 	setupCharacterRender();
 
 	function fetchQuests() {
-		return $.get('quests');
+		return $.get('quests?modVersion=9000.0.0-9000');
 	}
 
 	function buildQuestList(quests) {

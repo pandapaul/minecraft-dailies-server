@@ -25,7 +25,8 @@ function generateDailies() {
 }
 
 function inflateQuest(dbQuest, modVersion) {
-    modVersion = modVersionParser(modVersion);
+    modVersion = modVersionParser.fromString(modVersion);
+
     let quest = {};
     if (dbQuest && dbQuest.name) {
         quest = questsMap[dbQuest.name];
