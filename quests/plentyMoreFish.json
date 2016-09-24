@@ -1,0 +1,15 @@
+{
+    "name": "Plenty More Fish",
+    "description": "Catch 12 Fish",
+    "type": "gather",
+    "target": {
+        "type": 349,
+        "quantity": 12
+    },
+    "reward": {
+        "type": 346,
+        "nbt": "{ench:[0:{lvl:1s,id:62s},1:{lvl:1s,id:34s}],RepairCost:3,display:{Name:\"Old Rod\"}}",
+        "quantity": 1
+    },
+    "minimumModBuild": 5
+}
