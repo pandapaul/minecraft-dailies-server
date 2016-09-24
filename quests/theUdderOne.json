@@ -7,7 +7,9 @@
         "quantity": 7
     },
     "reward": {
-        "type": 396,
-        "quantity": 5
-    }
+        "type": 403,
+        "quantity": 1,
+        "nbt": "{StoredEnchantments:[0:{lvl:1s,id:70s}]}"
+    },
+    "minimumModBuild": 5
 }

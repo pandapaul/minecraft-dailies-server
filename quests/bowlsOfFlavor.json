@@ -8,7 +8,7 @@
     },
     "reward": {
         "type": 383,
-        "nbt": "{EntityTag: {id:\"MushroomCow\"}}",
+        "nbt": "{EntityTag: {id:MushroomCow}}",
         "quantity": 1
     },
     "minimumModBuild": 5
