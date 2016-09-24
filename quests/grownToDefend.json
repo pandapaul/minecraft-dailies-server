@@ -1,0 +1,15 @@
+{
+    "name": "Grown to Defend",
+    "description": "Gather 64 Vines",
+    "type": "gather",
+    "target": {
+        "type": 106,
+        "quantity": 64
+    },
+    "reward": {
+        "type": 403,
+        "nbt": "{StoredEnchantments:[0:{lvl:3s,id:7s}]}",
+        "quantity": 1
+    },
+    "minimumModBuild": 5
+}
