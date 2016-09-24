@@ -1,0 +1,15 @@
+{
+    "name": "Baker's Dozen",
+    "description": "Bake 13 Cakes",
+    "type": "gather",
+    "target": {
+        "type": 354,
+        "quantity": 13
+    },
+    "reward": {
+        "type": 322,
+        "subType": 1,
+        "quantity": 1
+    },
+    "minimumModBuild": 5
+}

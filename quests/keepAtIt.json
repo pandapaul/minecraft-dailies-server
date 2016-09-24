@@ -1,0 +1,15 @@
+{
+    "name": "Keep at It",
+    "description": "Gather Rotten Flesh",
+    "type": "gather",
+    "target": {
+        "type": 367,
+        "quantity": 100
+    },
+    "reward": {
+        "type": 403,
+        "nbt": "{StoredEnchantments:[0:{lvl:2s,id:21s}]}",
+        "quantity": 1
+    },
+    "minimumModBuild": 5
+}

@@ -1,0 +1,13 @@
+{
+    "name": "Spuds and Such",
+    "description": "Farm 128 Potatoes",
+    "type": "gather",
+    "target": {
+        "type": 392,
+        "quantity": 128
+    },
+    "reward": {
+        "type": 384,
+        "quantity": 30
+    }
+}

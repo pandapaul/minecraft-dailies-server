@@ -1,0 +1,13 @@
+{
+    "name": "Whole Buncha Carrots",
+    "description": "Farm 128 Carrots",
+    "type": "gather",
+    "target": {
+        "type": 391,
+        "quantity": 128
+    },
+    "reward": {
+        "type": 384,
+        "quantity": 30
+    }
+}
