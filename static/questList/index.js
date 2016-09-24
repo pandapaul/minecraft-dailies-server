@@ -1,6 +1,7 @@
 $(function () {
     var questTemplate = $('.quest.template').removeClass('template').remove();
     var questListElement = $('.quest-list');
+    var questCount = $('.total-quest-count');
 
     fetchQuests()
     .then(buildQuestList);
@@ -13,6 +14,8 @@ $(function () {
         if (!quests) {
             return;
         }
+
+        questCount.text(quests.length);
 
         $.each(quests, function (index, quest) {
             var questElement = questTemplate.clone();
