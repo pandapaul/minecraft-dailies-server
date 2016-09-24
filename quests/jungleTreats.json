@@ -1,0 +1,15 @@
+{
+    "name": "Jungle Treats",
+    "description": "Bake 64 Cookies",
+    "type": "gather",
+    "target": {
+        "type": 357,
+        "quantity": 64
+    },
+    "reward": {
+        "type": 383,
+        "nbt": "{EntityTag:{id:\"Ozelot\"}}",
+        "quantity": 1
+    },
+    "minimumModBuild": 5
+}
