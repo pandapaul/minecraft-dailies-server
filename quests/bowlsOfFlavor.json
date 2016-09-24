@@ -1,0 +1,15 @@
+{
+    "name": "Bowls of Flavor",
+    "description": "Make Mushroom Stew",
+    "type": "gather",
+    "target": {
+        "type": 282,
+        "quantity": 1
+    },
+    "reward": {
+        "type": 383,
+        "nbt": "{EntityTag: {id:\"MushroomCow\"}}",
+        "quantity": 1
+    },
+    "minimumModBuild": 5
+}
