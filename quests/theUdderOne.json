@@ -9,5 +9,6 @@
     "reward": {
         "type": 396,
         "quantity": 5
-    }
+    },
+    "minimumModBuild": 5
 }

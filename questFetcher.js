@@ -6,7 +6,7 @@ const usernameRegexer = require('./db/usernameRegexer');
 function fetchQuestInventory(username, modVersion) {
     const questInventoryMap = {};
     const usernameRegex = usernameRegexer(username);
-    
+
     return fetchDailies()
         .then(setDailiesStatusAvailable)
         .then(fetchDailiesProgressions)
@@ -56,7 +56,7 @@ function fetchQuestInventory(username, modVersion) {
             if (!questInventoryMap.hasOwnProperty(quest)) {
                 continue;
             }
-            questInventory.push(questGenerator.inflateQuest(questInventoryMap[quest]));
+            questInventory.push(questGenerator.inflateQuest(questInventoryMap[quest], modVersion));
         }
         return questInventory;
     }
