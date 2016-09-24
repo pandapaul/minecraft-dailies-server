@@ -1,0 +1,13 @@
+{
+    "name": "The Udder One",
+    "description": "Fetch Milk Buckets",
+    "type": "gather",
+    "target": {
+        "type": 335,
+        "quantity": 7
+    },
+    "reward": {
+        "type": 396,
+        "quantity": 5
+    }
+}
