@@ -1,0 +1,16 @@
+{
+    "name": "Fish Carefully",
+    "description": "Catch 12 Pufferfish",
+    "type": "gather",
+    "target": {
+        "type": 349,
+        "quantity": 12,
+        "subType": 3
+    },
+    "reward": {
+        "type": 346,
+        "nbt": "{ench:[0:{lvl:3s,id:62s},1:{lvl:3s,id:34s}],RepairCost:3,display:{Name:\"Super Rod\"}}",
+        "quantity": 1
+    },
+    "minimumModBuild": 5
+}

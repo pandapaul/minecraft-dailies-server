@@ -1,0 +1,15 @@
+{
+    "name": "Fisherman's Delight",
+    "description": "Catch 192 Fish",
+    "type": "gather",
+    "target": {
+        "type": 349,
+        "quantity": 192
+    },
+    "reward": {
+        "type": 346,
+        "nbt": "{ench:[0:{lvl:3s,id:62s},1:{lvl:3s,id:61s},2:{lvl:3s,id:34s},3:{lvl:1s,id:70s}],RepairCost:3,display:{Name:\"Lu Shang's Rod\"}}",
+        "quantity": 1
+    },
+    "minimumModBuild": 5
+}

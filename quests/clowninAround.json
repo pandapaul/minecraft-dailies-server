@@ -1,0 +1,16 @@
+{
+    "name": "Clownin' Around",
+    "description": "Catch 12 Clownfish",
+    "type": "gather",
+    "target": {
+        "type": 349,
+        "quantity": 12,
+        "subType": 2
+    },
+    "reward": {
+        "type": 346,
+        "nbt": "{ench:[0:{lvl:3s,id:61s},1:{lvl:3s,id:34s}],RepairCost:3,display:{Name:\"Quirky Rod\"}}",
+        "quantity": 1
+    },
+    "minimumModBuild": 5
+}
