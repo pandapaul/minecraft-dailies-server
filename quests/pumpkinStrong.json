@@ -1,0 +1,15 @@
+{
+    "name": "Pumpkin Strong",
+    "description": "Farm 32 Pumpkins",
+    "type": "gather",
+    "target": {
+        "type": 86,
+        "quantity": 32
+    },
+    "reward": {
+        "type": 403,
+        "nbt": "{StoredEnchantments:[0:{lvl:2s,id:34s}]}",
+        "quantity": 1
+    },
+    "minimumModBuild": 5
+}

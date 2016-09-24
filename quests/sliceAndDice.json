@@ -1,0 +1,15 @@
+{
+    "name": "Slice and Dice",
+    "description": "Gather 64 Melon Slices",
+    "type": "gather",
+    "target": {
+        "type": 360,
+        "quantity": 64
+    },
+    "reward": {
+        "type": 403,
+        "nbt": "{StoredEnchantments:[0:{lvl:1s,id:34s}]}",
+        "quantity": 1
+    },
+    "minimumModBuild": 5
+}

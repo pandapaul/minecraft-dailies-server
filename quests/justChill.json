@@ -1,0 +1,15 @@
+{
+    "name": "Just Chill",
+    "description": "Gather 32 Ice",
+    "type": "gather",
+    "target": {
+        "type": 79,
+        "quantity": 32
+    },
+    "reward": {
+        "type": 403,
+        "nbt": "{StoredEnchantments:[0:{lvl:3s,id:34s}]}",
+        "quantity": 1
+    },
+    "minimumModBuild": 5
+}
