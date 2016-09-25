@@ -84,7 +84,7 @@ function fetchDailies() {
     return db.quest.findTodaysQuests()
         .then(function (quests) {
             if (quests && quests.length) {
-                return questGenerator.inflateQuests(quests, '9000-9000');
+                return questGenerator.inflateQuests(quests);
             } else {
                 return questGenerator.generateDailies();
             }

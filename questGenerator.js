@@ -27,7 +27,7 @@ function generateDailies() {
 function inflateQuest(dbQuest) {
     let quest = {};
     if (dbQuest && dbQuest.name) {
-        quest = questsMap[dbQuest.name];
+        quest = JSON.parse(JSON.stringify(questsMap[dbQuest.name]));
     }
     quest.id = dbQuest.id;
     quest.progress = dbQuest.progress;
