@@ -5,6 +5,7 @@ const db = require('./db');
 const Quest = db.quest;
 const quests = require('./questLoader').load();
 const questsMap = {};
+const mongoose = require('mongoose');
 
 quests.forEach(function (quest) {
     questsMap[quest.name] = quest;
@@ -33,7 +34,7 @@ function inflateQuest(dbQuest, modVersion) {
     }
 
     if (quest.minimumModBuild && modVersion.modBuild < quest.minimumModBuild) {
-        quest.id = chance.guid();
+        quest.id = mongoose.Types.ObjectId();
         quest.progress = 0;
         quest.status = 'available';
         quest.description = 'Please update mod. This quest requires build ' + quest.minimumModBuild + '.';
