@@ -11,12 +11,12 @@ $(function () {
 
     fetchQuests()
     .then(buildQuestList);
-    
+
     fetchStats()
     .then(showStats);
 
     function fetchQuests() {
-        return $.get('quests');
+        return $.get('quests?modVersion=9000.0.0-9000');
     }
 
     function buildQuestList(quests) {
@@ -42,23 +42,23 @@ $(function () {
     function search() {
         window.location.pathname = "/" + userSearch.val();
     }
-    
+
     function fetchStats() {
         return $.when(fetchCompletions(), fetchUsers());
     }
-    
+
     function fetchCompletions() {
         return $.get('stats/completions').done(function (count) {
             statsCompletions.text(count);
         });
     }
-    
+
     function fetchUsers() {
         return $.get('stats/users').done(function (count) {
             statsUsers.text(count);
         });
     }
-    
+
     function showStats() {
         statsDisplay.show();
     }
