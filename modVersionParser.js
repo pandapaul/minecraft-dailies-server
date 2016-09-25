@@ -7,7 +7,6 @@ function fromString(str) {
             modBuild: parseInt(modVersionSplit[1],10)
         };
     } catch (err) {
-        console.log(err);
         return {
             modBuild: 1
         };

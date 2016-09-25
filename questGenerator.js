@@ -25,41 +25,21 @@ function generateDailies() {
     return dailies;
 }
 
-function inflateQuest(dbQuest, modVersion) {
-    modVersion = modVersionParser.fromString(modVersion);
-
+function inflateQuest(dbQuest) {
     let quest = {};
     if (dbQuest && dbQuest.name) {
         quest = questsMap[dbQuest.name];
     }
-
-    console.log('modVersion', modVersion);
-
-    if (quest.minimumModBuild && (modVersion.modBuild < quest.minimumModBuild)) {
-        quest.id = mongoose.Types.ObjectId();
-        quest.progress = 0;
-        quest.status = 'available';
-        quest.description = 'Please update mod. This quest requires build ' + quest.minimumModBuild + '.';
-        quest.target = {
-            type: 0,
-            quantity: 100
-        };
-        quest.reward = {
-            type: 3,
-            quantity: 1
-        };
-    } else {
-        quest.id = dbQuest.id;
-        quest.progress = dbQuest.progress;
-        quest.status = dbQuest.status;
-    }
+    quest.id = dbQuest.id;
+    quest.progress = dbQuest.progress;
+    quest.status = dbQuest.status;
     return quest;
 }
 
-function inflateQuests(dbQuests, modVersion) {
+function inflateQuests(dbQuests) {
     const quests = [];
     dbQuests.forEach(function (dbQuest) {
-        quests.push(inflateQuest(dbQuest, modVersion));
+        quests.push(inflateQuest(dbQuest));
     });
     return quests;
 }

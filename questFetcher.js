@@ -7,9 +7,6 @@ function fetchQuestInventory(username, modVersion) {
     const questInventoryMap = {};
     const usernameRegex = usernameRegexer(username);
 
-    console.log('username', username);
-    console.log('modVersion', modVersion);
-
     return fetchDailies()
         .then(setDailiesStatusAvailable)
         .then(fetchDailiesProgressions)
