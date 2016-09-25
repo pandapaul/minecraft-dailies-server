@@ -5,7 +5,6 @@ const db = require('./db');
 const Quest = db.quest;
 const quests = require('./questLoader').load();
 const questsMap = {};
-const mongoose = require('mongoose');
 
 quests.forEach(function (quest) {
     questsMap[quest.name] = quest;

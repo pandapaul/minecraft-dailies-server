@@ -2,10 +2,13 @@
 const db = require('./db');
 const questGenerator = require('./questGenerator');
 const usernameRegexer = require('./db/usernameRegexer');
+const modVersionParser = require('./modVersionParser');
+const mongoose = require('mongoose');
 
 function fetchQuestInventory(username, modVersion) {
     const questInventoryMap = {};
     const usernameRegex = usernameRegexer(username);
+    modVersion = modVersionParser.fromString(modVersion);
 
     return fetchDailies()
         .then(setDailiesStatusAvailable)
@@ -56,7 +59,22 @@ function fetchQuestInventory(username, modVersion) {
             if (!questInventoryMap.hasOwnProperty(quest)) {
                 continue;
             }
-            questInventory.push(questGenerator.inflateQuest(questInventoryMap[quest], modVersion));
+            let inflatedQuest = questGenerator.inflateQuest(questInventoryMap[quest]);
+            if (inflatedQuest.minimumModBuild && (modVersion.modBuild < inflatedQuest.minimumModBuild)) {
+                inflatedQuest.id = mongoose.Types.ObjectId();
+                inflatedQuest.progress = 0;
+                inflatedQuest.status = 'available';
+                inflatedQuest.description = 'Please update mod. This quest requires build ' + inflatedQuest.minimumModBuild + '+.';
+                inflatedQuest.target = {
+                    type: 0,
+                    quantity: 100
+                };
+                inflatedQuest.reward = {
+                    type: 3,
+                    quantity: 1
+                };
+            }
+            questInventory.push(inflatedQuest);
         }
         return questInventory;
     }
