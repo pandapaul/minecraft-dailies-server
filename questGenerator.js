@@ -54,10 +54,10 @@ function inflateQuest(dbQuest, modVersion) {
     return quest;
 }
 
-function inflateQuests(dbQuests) {
+function inflateQuests(dbQuests, modVersion) {
     const quests = [];
     dbQuests.forEach(function (dbQuest) {
-        quests.push(inflateQuest(dbQuest));
+        quests.push(inflateQuest(dbQuest, modVersion));
     });
     return quests;
 }
