@@ -4,9 +4,10 @@ function fromString(str) {
         const modVersionSplit = str.split('-');
         return {
             minecraftVersion: modVersionSplit[0],
-            modBuild: modVersionSplit[1]
+            modBuild: parseInt(modVersionSplit[1],10)
         };
     } catch (err) {
+        console.log(err);
         return {
             modBuild: 1
         };

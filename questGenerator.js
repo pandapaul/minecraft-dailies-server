@@ -33,7 +33,7 @@ function inflateQuest(dbQuest, modVersion) {
         quest = questsMap[dbQuest.name];
     }
 
-    if (quest.minimumModBuild && modVersion.modBuild < quest.minimumModBuild) {
+    if (quest.minimumModBuild && (modVersion.modBuild < quest.minimumModBuild)) {
         quest.id = mongoose.Types.ObjectId();
         quest.progress = 0;
         quest.status = 'available';
