@@ -64,7 +64,7 @@ function fetchQuestInventory(username, modVersion) {
                 inflatedQuest.id = mongoose.Types.ObjectId();
                 inflatedQuest.progress = 0;
                 inflatedQuest.status = 'available';
-                inflatedQuest.description = 'Please update mod. This quest requires build ' + inflatedQuest.minimumModBuild + '+.';
+                inflatedQuest.description = 'Please update mod. This quest requires build ' + inflatedQuest.minimumModBuild + ' or higher.';
                 inflatedQuest.target = {
                     type: 0,
                     quantity: 100
