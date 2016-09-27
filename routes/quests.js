@@ -9,6 +9,7 @@ const authenticate = require('../authenticate');
 const db = require('../db');
 const Activity = db.activity;
 const maxAcceptableQuests = 10;
+let io;
 
 router.get('/', function (req, res, next) {
     if (req.params.username) {
@@ -240,9 +241,16 @@ function createActivity(req, res, next, action) {
     });
     activity.save()
         .then(function () {
+            io.emit('quest activity', activity);
             res.json(activity);
         })
         .catch(next);
 }
 
-module.exports = router;
+module.exports = function (ioIn) {
+    if (!ioIn) {
+        throw 'Must provide ioIn for quests routing';
+    }
+    io = ioIn;
+    return router;
+};

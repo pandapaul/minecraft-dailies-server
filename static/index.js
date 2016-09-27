@@ -8,12 +8,17 @@ $(function () {
     var statsDisplay = $('.stats').hide();
     var statsCompletions = statsDisplay.find('.quest-completions-count');
     var statsUsers = statsDisplay.find('.users-count');
+    var socket = io();
 
     fetchQuests()
     .then(buildQuestList);
 
     fetchStats()
     .then(showStats);
+    
+    socket.on('quest activity', function (activity) {
+        console.log('activity', activity);
+    });
 
     function fetchQuests() {
         return $.get('quests?modVersion=9000.0.0-9000');

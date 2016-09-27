@@ -2,10 +2,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const quests = require('./routes/quests');
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+const quests = require('./routes/quests')(io);
 const users = require('./routes/users');
 const db = require('./db');
-const questLoader = require('./questLoader');
 const stats = require('./routes/stats');
 
 routes();
@@ -28,7 +29,7 @@ function connectToDb() {
 
 function listen() {
 	const listenPort = process.env.PORT || 5000;
-	app.listen(listenPort);
+	http.listen(listenPort);
 	console.log('Listening on port ' + listenPort);
 }
 
