@@ -241,16 +241,10 @@ function createActivity(req, res, next, action) {
     });
     activity.save()
         .then(function () {
-            io.emit('quest activity', activity);
+            req.app.io.emit('quest activity', activity);
             res.json(activity);
         })
         .catch(next);
 }
 
-module.exports = function (ioIn) {
-    if (!ioIn) {
-        throw 'Must provide ioIn for quests routing';
-    }
-    io = ioIn;
-    return router;
-};
+module.exports = router;

@@ -4,17 +4,18 @@ const bodyParser = require('body-parser');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-const quests = require('./routes/quests')(io);
+const quests = require('./routes/quests');
 const users = require('./routes/users');
 const db = require('./db');
 const stats = require('./routes/stats');
 
-routes();
+setupIo();
+setupRoutes();
 connectToDb()
     .then(listen)
     .catch(logDbConnectionError);
 
-function routes() {
+function setupRoutes() {
     app.use(express.static('static'));
     app.use(bodyParser.json());
     app.use('/quests', quests);
@@ -25,6 +26,10 @@ function routes() {
 
 function connectToDb() {
     return db.connect();
+}
+
+function setupIo() {
+    app.io = io;
 }
 
 function listen() {
