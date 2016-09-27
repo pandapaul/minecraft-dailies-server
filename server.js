@@ -39,7 +39,9 @@ function logDbConnectionError(error) {
 function basicErrorHandling (err, req, res, next) {
     if (err.stack) {
         console.error(err.stack);
-        res.status(500).send('Unfortunately an error has occurred.');
+        res.status(500).json({
+            error: 'Unfortunately an error has occurred.'
+        });
     } else {
         res.status(400).json({
             error: err
