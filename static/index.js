@@ -1,8 +1,10 @@
 $(function () {
+    'use strict';
     var userSearch = $('.user-search input')
     .focus()
     .keyup(handleSearchKeyup);
     var questTemplate = $('.quest.template').removeClass('template').remove();
+    var actitivtyTemplate = $('.activity.template').removeClass('template').remove();
     var questListElement = $('.quest-list');
     var userSearchPattern = new RegExp('[a-zA-Z0-9_-]');
     var statsDisplay = $('.stats').hide();
@@ -15,7 +17,7 @@ $(function () {
 
     fetchStats()
     .then(showStats);
-    
+
     socket.on('quest activity', function (activity) {
         console.log('activity', activity);
     });

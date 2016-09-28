@@ -1,4 +1,5 @@
 $(function () {
+	'use strict';
 	var questTemplate = $('.quest.template').removeClass('template').remove();
 	var actitivtyTemplate = $('.activity.template').removeClass('template').remove();
 	var questListElement = $('.quest-list').hide();
