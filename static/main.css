@@ -53,6 +53,14 @@ a:hover {
     color: #44e;
 }
 
+a.user-profile-link {
+    color: inherit;
+}
+
+a.user-profile-link:hover {
+    color: #44e;
+}
+
 .quest-list {
     display: inline-block;
     vertical-align: top;

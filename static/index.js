@@ -45,6 +45,7 @@ $(function () {
         activityElement.find('.activity-action').addClass(activity.action).text(formatAction(activity.action));
         activityElement.find('.activity-quest-name').text((activity.quest && activity.quest.name) || 'Unnamed Quest');
         activityElement.find('.activity-date').text(moment(activity.date).fromNow());
+        activityElement.find('a.user-profile-link').attr('href', activity.username);
         return activityElement;
     }
     
