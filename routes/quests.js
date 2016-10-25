@@ -241,6 +241,10 @@ function createActivity(req, res, next, action) {
     });
     activity.save()
         .then(function () {
+            return db.quest.findOne({_id: activity.quest});
+        })
+        .then(function (quest) {
+            activity.quest = quest;
             req.app.io.emit('quest activity', activity);
             res.json(activity);
         })
