@@ -5,6 +5,7 @@ $(function () {
     .keyup(handleSearchKeyup);
     var questTemplate = $('.quest.template').removeClass('template').remove();
     var actitivtyTemplate = $('.activity.template').removeClass('template').remove();
+    var activityListElement = $('.activity-list');
     var questListElement = $('.quest-list');
     var userSearchPattern = new RegExp('[a-zA-Z0-9_-]');
     var statsDisplay = $('.stats').hide();
@@ -17,10 +18,51 @@ $(function () {
 
     fetchStats()
     .then(showStats);
+    
+    fetchActivities()
+    .then(buildActivityList);
 
-    socket.on('quest activity', function (activity) {
-        console.log('activity', activity);
-    });
+    socket.on('quest activity', logActivityStream);
+    
+    function fetchActivities() {
+		return $.get('activities');
+	}
+    
+    function buildActivityList(activities) {
+        if (!activities) {
+            return;
+        }
+		$.each(activities, function (index, activity) {
+			buildActivityLog(activity).appendTo(activityListElement);
+		});
+		activityListElement.show();
+	}
+    
+    function buildActivityLog(activity) {
+        var activityElement = actitivtyTemplate.clone();
+        activityElement.find('.activity-avatar').attr('src', 'https://crafatar.com/avatars/' + activity.username + '?overlay&size=25');
+        activityElement.find('.activity-username').text(activity.username);
+        activityElement.find('.activity-action').addClass(activity.action).text(formatAction(activity.action));
+        activityElement.find('.activity-quest-name').text((activity.quest && activity.quest.name) || 'Unnamed Quest');
+        activityElement.find('.activity-date').text(moment(activity.date).fromNow());
+        return activityElement;
+    }
+    
+    function logActivityStream(activity) {
+        activityListElement.find('.activity').last().remove();
+        buildActivityLog(activity).prependTo(activityListElement);
+    }
+
+	function formatAction(action) {
+		return actionMap[action] || action;
+	}
+
+	var actionMap = {
+		accept: 'accepted',
+		abandon: 'abandoned',
+		complete: 'completed',
+		progress: 'progressed'
+	};
 
     function fetchQuests() {
         return $.get('quests?modVersion=9000.0.0-9000');

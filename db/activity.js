@@ -18,6 +18,12 @@ activitySchema.statics.findForUser = function (username) {
     }).populate('quest');
 };
 
+activitySchema.statics.findRecent = function (username) {
+    return this.find().limit(12).sort({
+        date: 'descending'
+    }).populate('quest');
+};
+
 activitySchema.set('toJSON', {
     transform: function (doc, ret, options) {
         ret.id = ret._id;

@@ -8,6 +8,7 @@ const quests = require('./routes/quests');
 const users = require('./routes/users');
 const db = require('./db');
 const stats = require('./routes/stats');
+const activities = require('./routes/activities');
 
 setupIo();
 setupRoutes();
@@ -19,6 +20,7 @@ function setupRoutes() {
     app.use(express.static('static'));
     app.use(bodyParser.json());
     app.use('/quests', quests);
+    app.use('/activities', activities);
     app.use('/:username', users);
     app.use('/stats', stats);
     app.use(basicErrorHandling);

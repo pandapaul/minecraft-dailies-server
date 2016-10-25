@@ -7,6 +7,7 @@
 <meta name="description" content="Daily quests for hunting, gathering, and exploring the wonderful world of Minecraft.">
 <meta name="keywords" content="minecraft,daily,quest,quests,mod,forge,rewards,bailey">
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="index.js" type="text/javascript"></script>
 <script src="analytics.js" type="text/javascript"></script>
@@ -45,13 +46,16 @@
         </div>
     </div>
 
-    <div class="activity-list">
-        <h3>Activity</h3>
-        <div class="activity template">
-            <span class="activity-avatar"></span>
-            <span class="activity-action"></span>
-            <span class="activity-quest-name"></span>
-            <span class="activity-date"></span>
+    <div class="activity-stream">
+        <h3>Activity</h3>    
+        <div class="activity-list">
+            <div class="activity template">
+                <img class="activity-avatar"></img>
+                <span class="activity-username"></span>
+                <span class="activity-action"></span>
+                <span class="activity-quest-name"></span>
+                <span class="activity-date"></span>
+            </div>
         </div>
     </div>
 
