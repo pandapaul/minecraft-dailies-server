@@ -24,6 +24,15 @@ $(function () {
 
     socket.on('quest activity', logActivityStream);
     
+    setInterval(updateTimestamps, 30000);
+    
+    function updateTimestamps() {
+        activityListElement.find('.activity').each(function (i, activityElement) {
+            activityElement = $(activityElement);
+            activityElement.find('.activity-date').text(moment(activityElement.data('date')).fromNow());
+        });
+    }
+    
     function fetchActivities() {
 		return $.get('activities');
 	}
@@ -46,6 +55,7 @@ $(function () {
         activityElement.find('.activity-quest-name').text((activity.quest && activity.quest.name) || 'Unnamed Quest');
         activityElement.find('.activity-date').text(moment(activity.date).fromNow());
         activityElement.find('a.user-profile-link').attr('href', activity.username);
+        activityElement.data('date', activity.date);
         return activityElement;
     }
     
