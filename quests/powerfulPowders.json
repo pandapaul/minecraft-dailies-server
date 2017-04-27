@@ -1,0 +1,13 @@
+{
+    "name": "Powerful Powders",
+    "description": "Gather 20 Gunpowder",
+    "type": "gather",
+    "target": {
+        "type": 289,
+        "quantity": 20
+    },
+    "reward": {
+        "type": 388,
+        "quantity": 16
+    }
+}
