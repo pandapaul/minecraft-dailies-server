@@ -4,6 +4,7 @@
   "description": "Serves up fresh Minecraft quests daily.",
   "main": "server.js",
   "scripts": {
+    "lint": "standard",
     "debug": "node debug server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "document": "apidoc -i ./routes -o ./static/docs"
@@ -28,6 +29,14 @@
     "yggdrasil": "^0.1.0"
   },
   "devDependencies": {
-    "apidoc": "^0.16.1"
+    "apidoc": "^0.16.1",
+    "pre-commit": "^1.2.2",
+    "standard": "^10.0.2"
+  },
+  "pre-commit": "lint",
+  "standard": {
+    "ignore": [
+      "/static/docs"
+    ]
   }
 }

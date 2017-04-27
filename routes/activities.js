@@ -1,7 +1,7 @@
-'use strict';
-const express = require('express');
-const router = express.Router();
-const db = require('../db');
+'use strict'
+const express = require('express')
+const router = express.Router()
+const db = require('../db')
 
 /**
  * @api {get} /activities Get Recent Activities
@@ -9,11 +9,11 @@ const db = require('../db');
  * @apiVersion 1.0.0
  */
 router.get('/', function (req, res, next) {
-    db.activity.findRecent()
+  db.activity.findRecent()
         .then(function (activities) {
-            res.json(activities);
+          res.json(activities)
         })
-        .catch(next);
-});
+        .catch(next)
+})
 
-module.exports = router;
+module.exports = router
