@@ -29,7 +29,7 @@ $(function () {
   function updateTimestamps () {
     activityListElement.find('.activity').each(function (i, activityElement) {
       activityElement = $(activityElement)
-      activityElement.find('.activity-date').text(moment(activityElement.data('date')).fromNow())
+      activityElement.find('.activity-date').text(activityElement.data('date').fromNow())
     })
   }
 
@@ -42,9 +42,18 @@ $(function () {
       return
     }
     $.each(activities, function (index, activity) {
+      normalizeActivityDate(activity)
       buildActivityLog(activity).appendTo(activityListElement)
     })
     activityListElement.show()
+  }
+
+  function normalizeActivityDate (activity) {
+    var now = moment()
+    activity.date = moment(activity.date)
+    if (activity.date > now) {
+      activity.date = now
+    }
   }
 
   function buildActivityLog (activity) {
@@ -53,7 +62,7 @@ $(function () {
     activityElement.find('.activity-username').text(activity.username)
     activityElement.find('.activity-action').addClass(activity.action).text(formatAction(activity.action))
     activityElement.find('.activity-quest-name').text((activity.quest && activity.quest.name) || 'Unnamed Quest')
-    activityElement.find('.activity-date').text(moment(activity.date).fromNow())
+    activityElement.find('.activity-date').text(activity.date.fromNow())
     activityElement.find('a.user-profile-link').attr('href', activity.username)
     activityElement.data('date', activity.date)
     return activityElement
