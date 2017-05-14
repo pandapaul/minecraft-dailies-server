@@ -72,6 +72,7 @@ $(function () {
 
   function logActivityStream (activity) {
     activityListElement.find('.activity').last().remove()
+    normalizeActivityDate(activity)
     buildActivityLog(activity).prependTo(activityListElement)
   }
 
