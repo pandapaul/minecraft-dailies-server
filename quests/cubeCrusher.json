@@ -7,7 +7,7 @@
         "quantity": 12
     },
     "reward": {
-        "type": 64,
+        "type": 384,
         "quantity": 45
     }
 }
