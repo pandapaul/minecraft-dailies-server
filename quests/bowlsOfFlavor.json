@@ -8,6 +8,7 @@
     },
     "reward": {
         "type": 383,
+        "subType": 96,
         "nbt": "{EntityTag: {id:MushroomCow}}",
         "quantity": 1
     },

@@ -8,6 +8,7 @@
     },
     "reward": {
         "type": 383,
+        "subType": 98,
         "nbt": "{EntityTag:{id:\"Ozelot\"}}",
         "quantity": 1
     },

@@ -1,9 +1,12 @@
 
 module.exports = {
-  entry: './index.js',
+  entry: {
+    './': './index.js',
+    'questList/': './questList/index.js'
+  },
   output: {
     path: __dirname,
-    filename: 'bundle.js'
+    filename: '[name]bundle.js'
   },
   module: {
     loaders: []
