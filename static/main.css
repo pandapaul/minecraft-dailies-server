@@ -127,6 +127,21 @@ a.user-profile-link:hover {
 
 }
 
+.quest-reward {
+  text-align: right;
+  margin-top: 1em;
+}
+
+.quest-reward-icon {
+  vertical-align: middle;
+  height: 2em;
+  margin-top: -0.4em;
+}
+
+.quest-reward-quantity {
+
+}
+
 .quest-progress {
     background-color: rgba(22, 104, 90, 0.3);
     border-top: 1px solid rgba(22, 104, 90, 0.3);
