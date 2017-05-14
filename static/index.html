@@ -9,7 +9,7 @@
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
-<script src="index.js" type="text/javascript"></script>
+<script src="bundle.js" type="text/javascript"></script>
 <script src="analytics.min.js" type="text/javascript"></script>
 </head>
 
@@ -43,11 +43,16 @@
                 <div class="quest-name"></div>
                 <div class="quest-description"></div>
             </div>
+            <div class="quest-reward">
+              Rewards
+              <span class="quest-reward-quantity"></span>
+              <img class="quest-reward-icon"></img>
+            </div>
         </div>
     </div>
 
     <div class="activity-stream">
-        <h3>Activity</h3>    
+        <h3>Activity</h3>
         <div class="activity-list">
             <div class="activity template">
                 <a class="user-profile-link">

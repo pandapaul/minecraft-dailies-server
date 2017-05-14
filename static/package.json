@@ -1,0 +1,14 @@
+{
+  "name": "minecraft-dailies-ui",
+  "version": "1.0.0",
+  "scripts": {
+    "bundle": "webpack"
+  },
+  "dependencies": {
+    "minecraft-items": "^0.2.1"
+  },
+  "devDependencies": {
+    "expose-loader": "^0.7.3",
+    "webpack": "^2.5.1"
+  }
+}
