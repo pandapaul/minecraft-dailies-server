@@ -8,7 +8,7 @@ $(function () {
   var characterRender = $('.character-render').hide()
   var username = window.location.pathname.replace(/\//g, '')
   var headerStats = $('.header .stats')
-  $('.profile-name').text(username.toUpperCase())
+  $('.profile-name').text(decodeURIComponent(username).toUpperCase())
 
   fetchQuests()
   .then(buildQuestList)
