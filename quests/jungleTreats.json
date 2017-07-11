@@ -9,7 +9,7 @@
     "reward": {
         "type": 383,
         "subType": 98,
-        "nbt": "{EntityTag:{id:\"Ozelot\"}}",
+        "nbt": "{EntityTag:{id:\"minecraft:ocelot\"}}",
         "quantity": 1
     },
     "minimumModBuild": 5
