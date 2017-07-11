@@ -9,7 +9,7 @@
     "reward": {
         "type": 383,
         "subType": 96,
-        "nbt": "{EntityTag: {id:MushroomCow}}",
+        "nbt": "{EntityTag: {id:\"minecraft:mooshroom\"}}",
         "quantity": 1
     },
     "minimumModBuild": 5
