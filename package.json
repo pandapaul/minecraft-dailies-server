@@ -1,6 +1,6 @@
 {
   "name": "minecraft-dailies-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Serves up fresh Minecraft quests daily.",
   "main": "server.js",
   "scripts": {
