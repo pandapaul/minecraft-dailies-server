@@ -5,6 +5,8 @@ const user = require('./user')
 const activity = require('./activity')
 const progression = require('./progression')
 
+mongoose.Promise = Promise
+
 function connect () {
   return new Promise(function (resolve, reject) {
     const db = mongoose.connection
