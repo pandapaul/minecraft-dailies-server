@@ -10,7 +10,7 @@ function connect () {
     const db = mongoose.connection
     db.on('error', reject)
     db.once('open', resolve)
-    mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/test')
+    mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/test', { useMongoClient: true })
   })
 }
 
