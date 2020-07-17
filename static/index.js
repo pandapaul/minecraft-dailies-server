@@ -60,7 +60,7 @@ $(function () {
 
   function buildActivityLog (activity) {
     var activityElement = actitivtyTemplate.clone()
-    activityElement.find('.activity-avatar').attr('src', 'https://crafatar.com/avatars/' + activity.username + '?overlay&size=25')
+    activityElement.find('.activity-avatar').attr('src', 'https://minotar.net/avatar/' + activity.username + '/25')
     activityElement.find('.activity-username').text(activity.username)
     activityElement.find('.activity-action').addClass(activity.action).text(formatAction(activity.action))
     activityElement.find('.activity-quest-name').text((activity.quest && activity.quest.name) || 'Unnamed Quest')

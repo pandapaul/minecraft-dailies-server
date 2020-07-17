@@ -97,7 +97,7 @@ $(function () {
   }
 
   function setupCharacterRender () {
-    characterRender.attr('src', 'https://crafatar.com/renders/body/' + username + '?overlay&scale=5').show()
+    characterRender.attr('src', 'https://minotar.net/body/' + username + '/100.png').show()
   }
 
   function fetchStats () {
