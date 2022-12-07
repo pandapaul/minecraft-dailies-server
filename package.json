@@ -20,13 +20,13 @@
   },
   "homepage": "https://github.com/pandapaul/minecraft-dailies-server#readme",
   "dependencies": {
-    "body-parser": "^1.15.0",
+    "body-parser": "^1.20.1",
     "chance": "^1.0.1",
     "escape-string-regexp": "^1.0.5",
-    "express": "^4.13.4",
+    "express": "^4.18.2",
     "mongoose": "^4.11.5",
     "socket.io": "^1.4.8",
-    "yggdrasil": "^0.1.0",
+    "yggdrasil": "^1.7.0",
     "minecraft-dailies-ui": "./static"
   },
   "devDependencies": {
