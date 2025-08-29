@@ -1,7 +1,6 @@
 'use strict'
 const chance = require('chance').Chance()
 const db = require('./db')
-const Quest = db.quest
 const quests = require('./questLoader').load()
 const questsMap = {}
 
@@ -9,17 +8,13 @@ quests.forEach(function (quest) {
   questsMap[quest.name] = quest
 })
 
-function generateDailies () {
+async function generateDailies () {
   const dailies = chance.pickset(quests, 5)
-  dailies.forEach(function (daily, index) {
-    const dbQuest = new Quest({
-      name: daily.name
-    })
-    dbQuest.save().catch(function (err) {
-      console.log('ERROR - Unable to save generated daily - ', err)
-    })
-    dailies[index].id = dbQuest.id
-  })
+  // Create quests in DB and attach generated ids
+  await Promise.all(dailies.map(async function (daily, index) {
+    const created = await db.quest.create({ name: daily.name })
+    dailies[index].id = created.id
+  }))
   return dailies
 }
 

@@ -7,7 +7,6 @@ const questFetcher = require('../questFetcher')
 const questLoader = require('../questLoader')
 const authenticate = require('../authenticate')
 const db = require('../db')
-const Activity = db.activity
 const maxAcceptableQuests = 10
 
 router.get('/', function (req, res, next) {
@@ -233,21 +232,19 @@ function updateQuestProgress (username, questId, progress) {
 }
 
 function createActivity (req, res, next, action) {
-  const activity = new Activity({
+  const activity = {
     username: req.params.username || req.body.username,
     quest: req.params.questId,
     action: action
-  })
-  activity.save()
-        .then(function () {
-          return db.quest.findOne({_id: activity.quest})
-        })
-        .then(function (quest) {
-          activity.quest = quest
-          req.app.io.emit('quest activity', activity)
-          res.json(activity)
-        })
-        .catch(next)
+  }
+  db.activity.create(activity)
+    .then(async function (saved) {
+      const quest = await db.quest.findByQuestId(saved.quest)
+      saved.quest = quest
+      req.app.io.emit('quest activity', saved)
+      res.json(saved)
+    })
+    .catch(next)
 }
 
 module.exports = router

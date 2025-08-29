@@ -1,13 +1,11 @@
 'use strict'
 const db = require('./db')
 const questGenerator = require('./questGenerator')
-const usernameRegexer = require('./db/usernameRegexer')
 const modVersionParser = require('./modVersionParser')
-const mongoose = require('mongoose')
+const { randomUUID } = require('crypto')
 
 function fetchQuestInventory (username, modVersion) {
   const questInventoryMap = {}
-  const usernameRegex = usernameRegexer(username)
   modVersion = modVersionParser.fromString(modVersion)
 
   return fetchDailies()
@@ -40,17 +38,21 @@ function fetchQuestInventory (username, modVersion) {
 
   function fetchAcceptedProgressions () {
     return db.progression.find({
-      username: usernameRegex,
+      username: username,
       status: 'accepted'
-    }).populate('quest')
+    })
   }
 
   function addAcceptedQuests (acceptedProgressions) {
-    acceptedProgressions.forEach(function (progression) {
-      progression.quest.status = progression.status
-      progression.quest.progress = progression.progress
-      questInventoryMap[progression.quest.id] = progression.quest
-    })
+    return Promise.all(acceptedProgressions.map(function (progression) {
+      return db.quest.findByQuestId(progression.quest)
+        .then(function (quest) {
+          if (!quest) return
+          quest.status = progression.status
+          quest.progress = progression.progress
+          questInventoryMap[quest.id] = quest
+        })
+    }))
   }
 
   function buildInflatedInventory () {
@@ -61,7 +63,7 @@ function fetchQuestInventory (username, modVersion) {
       }
       let inflatedQuest = questGenerator.inflateQuest(questInventoryMap[quest])
       if (inflatedQuest.minimumModBuild && (modVersion.modBuild < inflatedQuest.minimumModBuild)) {
-        inflatedQuest.id = mongoose.Types.ObjectId()
+        inflatedQuest.id = randomId()
         inflatedQuest.progress = 0
         inflatedQuest.status = 'available'
         inflatedQuest.description = 'Please update mod. This quest requires build ' + inflatedQuest.minimumModBuild + ' or higher.'
@@ -102,4 +104,8 @@ module.exports = {
   fetchDailies: fetchDailies,
   fetchQuestById: fetchQuestById,
   fetchQuestInventory: fetchQuestInventory
+}
+
+function randomId () {
+  return randomUUID()
 }
