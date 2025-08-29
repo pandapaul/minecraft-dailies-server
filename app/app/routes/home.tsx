@@ -45,7 +45,7 @@ export async function loader() {
       const id = randomUUID()
       const createdAt = new Date().toISOString()
       await docClient.send(new PutCommand({ TableName: tn.quests, Item: { id, name: quest.name, createdAt } }))
-      todays.push({ id, name: quest.name })
+      todays.push({ id, ...quest })
     }
   }
 
@@ -55,20 +55,51 @@ export async function loader() {
 
 export default function Home({ loaderData }: Route.ComponentProps<typeof loader>) {
   const { quests, activities } = loaderData as { quests: any[]; activities: any[] }
+
   return (
-    <div>
-      <h1>Today\'s Quests</h1>
-      <ul>
+    <div className="max-w-5xl mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-4">Today\'s Quests</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {quests.map((q) => (
-          <li key={q.id}>{q.name}</li>
+          <QuestCard key={q.id} quest={q} />
         ))}
-      </ul>
-      <h2 style={{ marginTop: 24 }}>Recent Activity</h2>
-      <ul>
+      </div>
+
+      <h2 className="text-2xl font-bold mt-8 mb-4">Recent Activity</h2>
+      <ul className="space-y-2">
         {activities.map((a) => (
-          <li key={`${a.username}-${a.date}-${a.action}`}>{a.username} {a.action} {a.quest?.name}</li>
+          <li key={`${a.username}-${a.date}-${a.action}`} className="rounded border border-emerald-800/20 bg-emerald-50/50 p-3">
+            <span className="font-semibold">{a.username}</span> {a.action} <span className="italic">{a.quest?.name}</span>
+          </li>
         ))}
       </ul>
     </div>
   )
+}
+
+function QuestCard ({ quest }: { quest: any }) {
+  const icon = pickIconForQuest(quest)
+  return (
+    <div className="rounded border border-emerald-800/20 bg-emerald-50 p-4 shadow-sm">
+      <div className="flex items-start gap-3">
+        {icon && <img src={icon} alt="" className="w-8 h-8 mt-1" />}
+        <div>
+          <div className="text-lg font-semibold">{quest.name}</div>
+          {quest.description && <div className="text-sm opacity-80">{quest.description}</div>}
+        </div>
+      </div>
+      {quest.reward && (
+        <div className="text-right text-sm opacity-80 mt-3">Rewards {quest.reward.quantity}</div>
+      )}
+    </div>
+  )
+}
+
+function pickIconForQuest (quest: any) {
+  const name = (quest?.name || '').toLowerCase()
+  if (name.includes('kill') || name.includes('wrath') || name.includes('fear')) return '/images/diamondSword.png'
+  if (name.includes('mine') || name.includes('ore') || name.includes('redstone') || name.includes('gold')) return '/images/ironOre.png'
+  if (name.includes('gather') || name.includes('make') || name.includes('bake') || name.includes('smith')) return '/images/diamondPick.png'
+  if (name.includes('fish') || name.includes('squid') || name.includes('bucket')) return '/images/bucket.png'
+  return '/images/diamondPick.png'
 }
