@@ -6,6 +6,10 @@ import { randomUUID } from "node:crypto"
 import { join } from "jsr:@std/path/join"
 import { fromFileUrl } from "jsr:@std/path/from-file-url"
 import { findRecent } from "../lib/activity.ts"
+import { Card, CardHeader, CardContent } from "../components/ui/card.tsx"
+import { Input } from "../components/ui/input.tsx"
+import { Button } from "../components/ui/button.tsx"
+import { Form } from "react-router"
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -58,7 +62,22 @@ export default function Home({ loaderData }: Route.ComponentProps<typeof loader>
 
   return (
     <div className="max-w-5xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-4">Today\'s Quests</h1>
+      <Form action="/" method="get" onSubmit={(e) => {
+        const form = e.currentTarget as HTMLFormElement
+        const data = new FormData(form)
+        const username = String(data.get('username') || '').trim()
+        if (username) {
+          e.preventDefault()
+          window.location.href = `/${encodeURIComponent(username)}/quests`
+        }
+      }} className="mb-6">
+        <div className="flex gap-2">
+          <Input name="username" placeholder="Find a player" />
+          <Button type="submit">Go</Button>
+        </div>
+      </Form>
+
+      <h1 className="mc-heading">Today\'s Quests</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {quests.map((q) => (
           <QuestCard key={q.id} quest={q} />
@@ -80,18 +99,22 @@ export default function Home({ loaderData }: Route.ComponentProps<typeof loader>
 function QuestCard ({ quest }: { quest: any }) {
   const icon = pickIconForQuest(quest)
   return (
-    <div className="rounded border border-emerald-800/20 bg-emerald-50 p-4 shadow-sm">
-      <div className="flex items-start gap-3">
-        {icon && <img src={icon} alt="" className="w-8 h-8 mt-1" />}
-        <div>
-          <div className="text-lg font-semibold">{quest.name}</div>
-          {quest.description && <div className="text-sm opacity-80">{quest.description}</div>}
+    <Card className="shadow-sm mc-card">
+      <CardHeader>
+        <div className="flex items-start gap-3">
+          {icon && <img src={icon} alt="" className="w-8 h-8 mt-1" />}
+          <div>
+            <div className="text-lg font-semibold">{quest.name}</div>
+            {quest.description && <div className="text-sm opacity-80">{quest.description}</div>}
+          </div>
         </div>
-      </div>
+      </CardHeader>
       {quest.reward && (
-        <div className="text-right text-sm opacity-80 mt-3">Rewards {quest.reward.quantity}</div>
+        <CardContent>
+          <div className="text-right text-sm opacity-80">Rewards {quest.reward.quantity}</div>
+        </CardContent>
       )}
-    </div>
+    </Card>
   )
 }
 

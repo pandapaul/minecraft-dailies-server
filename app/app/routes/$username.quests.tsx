@@ -1,7 +1,9 @@
 // deno-lint-ignore-file no-explicit-any
 import * as React from "react"
 import type { LoaderFunctionArgs, ActionFunctionArgs } from "react-router"
-import { useLoaderData } from "react-router"
+import { useLoaderData, Form } from "react-router"
+import { Card, CardHeader, CardContent } from "../components/ui/card.tsx"
+import { Button } from "../components/ui/button.tsx"
 import { tableNames, docClient, ensureTables } from "../lib/dynamo.ts"
 import { ScanCommand, GetCommand } from "@aws-sdk/lib-dynamodb"
 import { inflateQuestByName } from "../lib/questLoader.ts"
@@ -86,15 +88,43 @@ export async function action({ params, request }: ActionFunctionArgs) {
 export default function UserQuestsRoute() {
   const data = useLoaderData() as { username: string; inventory: any[] }
   return (
-    <div>
-      <h1>{data.username}'s Quests</h1>
-      <ul>
+    <div className="max-w-5xl mx-auto p-6">
+      <h1 className="mc-heading">{data.username}\'s Quests</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {data.inventory.map((q) => (
-          <li key={q.id}>
-            {q.name} – {q.status || 'available'}
-          </li>
+          <Card key={q.id} className="shadow-sm mc-card">
+            <CardHeader>
+              <div className="text-lg font-semibold">{q.name}</div>
+            </CardHeader>
+            <CardContent className="flex items-center justify-between gap-2">
+              <div className="text-sm opacity-80">{q.status || 'available'}</div>
+              <div className="flex gap-2">
+                {(!q.status || q.status === 'available') && (
+                  <Form method="post">
+                    <input type="hidden" name="_action" value="accept" />
+                    <input type="hidden" name="questId" value={q.id} />
+                    <Button type="submit">Accept</Button>
+                  </Form>
+                )}
+                {q.status === 'accepted' && (
+                  <>
+                    <Form method="post">
+                      <input type="hidden" name="_action" value="complete" />
+                      <input type="hidden" name="questId" value={q.id} />
+                      <Button type="submit" variant="outline">Complete</Button>
+                    </Form>
+                    <Form method="post">
+                      <input type="hidden" name="_action" value="abandon" />
+                      <input type="hidden" name="questId" value={q.id} />
+                      <Button type="submit" variant="ghost">Abandon</Button>
+                    </Form>
+                  </>
+                )}
+              </div>
+            </CardContent>
+          </Card>
         ))}
-      </ul>
+      </div>
     </div>
   )
 }

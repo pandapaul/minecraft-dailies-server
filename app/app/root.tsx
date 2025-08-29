@@ -9,6 +9,7 @@ import {
 
 import type { Route } from "./+types/root.ts";
 import "./app.css";
+import { Navbar } from "./components/navbar.tsx";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -16,6 +17,10 @@ export const links: Route.LinksFunction = () => [
     rel: "preconnect",
     href: "https://fonts.gstatic.com",
     crossOrigin: "anonymous",
+  },
+  {
+    rel: "stylesheet",
+    href: "https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap",
   },
   {
     rel: "stylesheet",
@@ -34,6 +39,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+        <Navbar />
         {children}
         <ScrollRestoration />
         <Scripts />
