@@ -1,0 +1,4 @@
+{
+    "deno.enable": true,
+    "standard.enable": false
+}

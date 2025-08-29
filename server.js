@@ -12,6 +12,7 @@ const stats = require('./routes/stats')
 const activities = require('./routes/activities')
 
 setupIo()
+setupCors()
 setupRoutes()
 connectToDb()
     .then(listen)
@@ -25,6 +26,18 @@ function setupRoutes () {
   app.use('/:username', users)
   app.use('/stats', stats)
   app.use(basicErrorHandling)
+}
+
+function setupCors () {
+  app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
+    if (req.method === 'OPTIONS') {
+      return res.sendStatus(200)
+    }
+    next()
+  })
 }
 
 function connectToDb () {

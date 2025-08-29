@@ -1,0 +1,30 @@
+{
+  "tasks": {
+    "build": "NODE_ENV=production react-router build",
+    "dev": "AWS_REGION=us-east-1 DYNAMO_ENDPOINT=http://localhost:8888 DYNAMO_TABLE_PREFIX=dev_ AWS_ACCESS_KEY_ID=dummy AWS_SECRET_ACCESS_KEY=dummy react-router dev",
+    "format": "deno fmt",
+    "lint": "deno lint",
+    "start": "deno run -A ./server.production.ts",
+    "typecheck": {
+      "command": "deno check --node-modules-dir=auto '**/*'",
+      "dependencies": ["typegen"]
+    },
+    "typegen": "react-router typegen"
+  },
+  "compilerOptions": {
+    "lib": ["deno.window", "dom"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "jsxImportSourceTypes": "@types/react",
+    "rootDirs": [".", "./.react-router/types"],
+    "types": ["vite/client"]
+  },
+  "unstable": ["sloppy-imports"],
+  "exclude": ["build/"],
+  "nodeModulesDir": "manual",
+  "imports": {
+    "~/": "./app/",
+    "@std/http": "jsr:@std/http@^1.0.11",
+    "@std/path": "jsr:@std/path@^1.0.8"
+  }
+}
