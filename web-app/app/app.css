@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  /* Base palette derived from rgb(170, 221, 170) */
+  --mc-bg: #aaddaa;           /* rgb(170,221,170) */
+  --mc-text: #244224;         /* darkened for readable text */
+  --mc-border: #6fb06f;       /* darker border from base */
+  --mc-panel: #e6f6e6;        /* lighter card/panel */
+  --mc-accent: #4aa84a;       /* accent/darker buttons */
+}
+
+html,
+body {
+  background-color: var(--mc-bg);
+  color: var(--mc-text);
+  font-family: 'Minecraft', 'Press Start 2P', ui-sans-serif, system-ui, sans-serif;
+
+  @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+  }
+}
+
+.mc-panel {
+  @apply rounded shadow-sm;
+  background-color: var(--mc-panel);
+  border: 1px solid color-mix(in oklab, var(--mc-border) 70%, transparent);
+}
+
+.mc-header {
+  /* If you drop a tileable texture at /images/grass.png it will be used */
+  background-color: var(--mc-bg);
+  background-image: url('/images/grass.png');
+  background-size: 48px 48px; /* pixelly tiling */
+  background-repeat: repeat;
+  border-bottom: 1px solid color-mix(in oklab, var(--mc-border) 60%, transparent);
+}
+
+@font-face {
+  font-family: 'Minecraft';
+  src: url('/fonts/Minecraft.woff2') format('woff2');
+  font-display: swap;
+}
+
+.mc-title {
+  @apply text-3xl font-extrabold tracking-wide drop-shadow;
+  font-family: 'Minecraft', 'Press Start 2P', monospace;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.25);
+}
+
+.mc-heading {
+  @apply text-3xl font-extrabold mb-4;
+  font-family: 'Minecraft', 'Press Start 2P', monospace;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.15);
+}
+
+img {
+  image-rendering: pixelated;
+}
+
+.mc-card {
+  @apply transition-transform hover:-translate-y-0.5 hover:shadow-md relative;
+  /* Pixel-y multi-shadow border */
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--mc-border) 60%, transparent),
+    0 2px 0 0 rgba(0,0,0,0.05),
+    2px 2px 0 0 rgba(0,0,0,0.05);
+}
+
+.mc-divider {
+  height: 8px;
+  margin: 6px 0 18px 0;
+  background-image:
+    repeating-linear-gradient(90deg,
+      color-mix(in oklab, var(--mc-accent) 85%, black) 0,
+      color-mix(in oklab, var(--mc-accent) 85%, black) 12px,
+      color-mix(in oklab, var(--mc-bg) 70%, white) 12px,
+      color-mix(in oklab, var(--mc-bg) 70%, white) 24px);
+  image-rendering: pixelated;
+  border: 1px solid color-mix(in oklab, var(--mc-border) 60%, transparent);
+}

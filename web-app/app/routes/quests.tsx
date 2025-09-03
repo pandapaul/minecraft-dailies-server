@@ -4,8 +4,7 @@ import { ScanCommand, PutCommand } from "@aws-sdk/lib-dynamodb"
 import { randomUUID } from "node:crypto"
 import { join } from "jsr:@std/path/join"
 import { fromFileUrl } from "jsr:@std/path/from-file-url"
-import { Card, CardHeader, CardContent } from "../components/ui/card.tsx"
-import { Badge } from "../components/ui/badge.tsx"
+import { QuestCard } from "../components/QuestCard.tsx"
 
 export async function loader(_args: LoaderFunctionArgs) {
   await ensureTables()
@@ -50,19 +49,9 @@ export default function QuestsRoute() {
   const quests = useLoaderData() as any[]
   return (
     <div className="max-w-5xl mx-auto p-6">
-      <h1 className="mc-heading">Today\'s Quests</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {quests.map((q) => (
-          <Card key={q.id} className="shadow-sm mc-card">
-            <CardHeader>
-              <div className="text-lg font-semibold">{q.name}</div>
-            </CardHeader>
-            <CardContent className="flex items-center justify-between">
-              <div className="text-sm opacity-80">{q.description}</div>
-              <Badge>Daily</Badge>
-            </CardContent>
-          </Card>
-        ))}
+      <h1 className="mc-heading">Today's Quests</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {quests.map((q) => (<QuestCard key={q.id} quest={q} />))}
       </div>
       <div className="mt-6 text-right">
         <Link to="/quests/list" className="text-emerald-700 underline">See all quests</Link>

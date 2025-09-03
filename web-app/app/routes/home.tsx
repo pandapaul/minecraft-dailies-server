@@ -77,7 +77,7 @@ export default function Home({ loaderData }: Route.ComponentProps<typeof loader>
         </div>
       </Form>
 
-      <h1 className="mc-heading">Today\'s Quests</h1>
+      <h1 className="mc-heading">Today's Quests</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {quests.map((q) => (
           <QuestCard key={q.id} quest={q} />

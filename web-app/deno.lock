@@ -20,6 +20,7 @@
     "npm:@types/react-dom@^19.0.2": "19.0.4_@types+react@19.0.10",
     "npm:@types/react@^19.0.2": "19.0.10",
     "npm:isbot@^5.1.18": "5.1.23",
+    "npm:minecraft-items@~0.4.3": "0.4.3",
     "npm:react-dom@19": "19.1.1_react@19.1.1",
     "npm:react-router@*": "7.8.2_react@19.1.1_react-dom@19.1.1__react@19.1.1",
     "npm:react-router@^7.8.2": "7.8.2_react@19.1.1_react-dom@19.1.1__react@19.1.1",
@@ -2004,6 +2005,9 @@
         "@jridgewell/sourcemap-codec"
       ]
     },
+    "minecraft-items@0.4.3": {
+      "integrity": "sha512-ltOaGeUzu+L/EDuA21MYndnosA2JlJud6hsYJc+T2KhLNiPYlAsz3ZtGedklFUi0qfoka5iYYMixk4HwCdhL4A=="
+    },
     "minimatch@9.0.5": {
       "integrity": "sha512-G6T0ZX48xgozx7587koeX9Ys2NYy6Gmv//P89sEte9V9whIapMNF4idKxnW2QtCcLiTWlb/wfCabAtAFWhhBow==",
       "dependencies": [
@@ -2429,6 +2433,7 @@
         "npm:@types/react-dom@^19.0.2",
         "npm:@types/react@^19.0.2",
         "npm:isbot@^5.1.18",
+        "npm:minecraft-items@~0.4.3",
         "npm:react-dom@19",
         "npm:react-router@^7.8.2",
         "npm:react@19",

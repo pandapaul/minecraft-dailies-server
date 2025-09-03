@@ -6,7 +6,8 @@
     "isbot": "^5.1.18",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router": "^7.8.2"
+    "react-router": "^7.8.2",
+    "minecraft-items": "^0.4.3"
   },
   "devDependencies": {
     "@deno/vite-plugin": "^1.0.2",
